@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Users, 
   Search, 
@@ -52,9 +52,7 @@ export const RentersView: React.FC<RentersViewProps> = ({
   const [statusFilter, setStatusFilter] = useState<string>(initialFilter);
 
   useEffect(() => {
-    if (initialFilter) {
-      setStatusFilter(initialFilter);
-    }
+    setStatusFilter(initialFilter || 'all');
   }, [initialFilter]);
 
   // Counts

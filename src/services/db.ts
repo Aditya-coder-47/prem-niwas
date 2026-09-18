@@ -292,32 +292,18 @@ export async function updateRoom(roomId: string, updates: Partial<Room>): Promis
 // ==================== RENTERS OPERATIONS ====================
 
 export function subscribeRenters(callback: (renters: Renter[]) => void) {
-  // Try with orderBy first (needs Firestore index)
-  const orderedQ = query(collection(db, 'renters'), orderBy('createdAt', 'desc'));
-  let unsubOrdered: (() => void) | null = null;
-
-  unsubOrdered = onSnapshot(orderedQ, (snapshot) => {
-    const renters = snapshot.docs.map(doc => doc.data() as Renter);
+  // Use simple collection query (no orderBy = no index requirement)
+  // Sorting is handled client-side for reliability
+  const q = collection(db, 'renters');
+  return onSnapshot(q, (snapshot) => {
+    const renters = snapshot.docs
+      .map(doc => doc.data() as Renter)
+      .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
     callback(renters);
   }, (err) => {
-    // Fallback: query without orderBy if index missing
-    console.warn('Renters ordered query failed (index may be missing), falling back:', err?.message);
-    if (unsubOrdered) { unsubOrdered(); unsubOrdered = null; }
-
-    const fallbackQ = collection(db, 'renters');
-    const unsubFallback = onSnapshot(fallbackQ, (snapshot) => {
-      const renters = snapshot.docs
-        .map(doc => doc.data() as Renter)
-        .sort((a, b) => (b.createdAt || '').localeCompare(a.createdAt || ''));
-      callback(renters);
-    }, (err2) => {
-      console.error('Renters fallback subscription error:', err2);
-    });
-    // Replace unsub reference
-    unsubOrdered = unsubFallback;
+    console.error('Renters subscription error:', err);
+    callback([]);
   });
-
-  return () => { if (unsubOrdered) unsubOrdered(); };
 }
 
 export async function registerRenter(

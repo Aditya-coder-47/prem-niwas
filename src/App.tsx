@@ -84,6 +84,14 @@ function MainApp() {
     };
   }, []);
 
+  // Reset renter filter when leaving the renters tab
+  useEffect(() => {
+    if (currentTab !== 'renters') {
+      // Don't reset immediately — only clear when navigating away without a pending filter
+      // This is handled by onNavigateTab callback
+    }
+  }, [currentTab]);
+
   // Update tab if role changes
   useEffect(() => {
     if (role === 'renter') {
@@ -113,10 +121,12 @@ function MainApp() {
   }
 
   // Pending approval screen for non-owner renters waiting for owner KYC verification and room allotment
-  const isRenterPending = role === 'renter' && (
-    profile?.approvalStatus === 'pending' || 
-    renterRecord?.status === 'pending_approval' || 
-    (renterRecord?.status !== 'active' && !renterRecord?.roomId)
+  // Only show if renterRecord is loaded (not null from loading state) and genuinely pending
+  const isRenterPending = role === 'renter' && profile && (
+    profile.approvalStatus === 'pending' || 
+    profile.approvalStatus === 'rejected' ||
+    renterRecord?.status === 'pending_approval' ||
+    renterRecord?.status === 'rejected'
   );
 
   if (isRenterPending) {
@@ -160,8 +170,8 @@ function MainApp() {
                 notices={notices}
                 onNavigateTab={(tab, filter) => {
                   setCurrentTab(tab);
-                  if (tab === 'rooms' && filter) setRoomFilterProp(filter);
-                  if (tab === 'renters' && filter) setRenterFilterProp(filter);
+                  if (tab === 'rooms') setRoomFilterProp(filter || 'all');
+                  if (tab === 'renters') setRenterFilterProp(filter || 'all');
                 }}
                 onOpenRegisterModal={() => {
                   setPreSelectedRoom(null);
