@@ -1,0 +1,6 @@
+{
+  "name": "Amit Niwas",
+  "description": "Production-grade residential rental management application for Amit Niwas with room allocation, billing, live chat, and tenant portal.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
