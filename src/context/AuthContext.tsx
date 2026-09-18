@@ -70,72 +70,81 @@ export function AuthProvider({ children }: { children: ReactNode }) {
     });
   }, []);
 
+  // Helper: race a promise against a timeout to prevent hanging
+  const withTimeout = <T,>(promise: Promise<T>, ms: number, fallback: T): Promise<T> =>
+    Promise.race([
+      promise,
+      new Promise<T>((resolve) => setTimeout(() => resolve(fallback), ms))
+    ]);
+
   const syncUserProfile = async (user: User, skipRenterCreation = false) => {
     const userEmail = (user.email || '').toLowerCase().trim();
     const isOwner = isOwnerEmail(userEmail);
 
     try {
       const userRef = doc(db, 'users', user.uid);
-      const userSnap = await getDoc(userRef);
+      const userSnap = await withTimeout(getDoc(userRef), 5000, null as any);
 
       let renterId: string | null = null;
 
       // If renterRecord was already created by registerRenterAccount (skipRenterCreation=true),
       // trust the user doc's renterId instead of re-querying / creating duplicates
       if (!isOwner && !skipRenterCreation) {
-        if (userSnap.exists()) {
+        if (userSnap?.exists()) {
           const existingData = userSnap.data() as UserProfile;
-          // If user doc already has a renterId (set by registerRenterAccount), use it
           if (existingData.renterId) {
             renterId = existingData.renterId;
           }
         }
 
         if (!renterId) {
-          // Check if renter record exists with this email or userId
-          const rentersRef = collection(db, 'renters');
-          const q = query(rentersRef, where('email', '==', userEmail));
-          const snap = await getDocs(q);
+          // Check if renter record exists with this email
+          try {
+            const rentersRef = collection(db, 'renters');
+            const q = query(rentersRef, where('email', '==', userEmail));
+            const snap = await getDocs(q);
 
-          if (!snap.empty) {
-            renterId = snap.docs[0].id;
-            const existingRenterData = snap.docs[0].data() as Renter;
-            if (!existingRenterData.userId) {
-              await setDoc(doc(db, 'renters', renterId), { userId: user.uid }, { merge: true });
+            if (!snap.empty && snap.docs.length > 0) {
+              renterId = snap.docs[0].id;
+              const existingRenterData = snap.docs[0].data() as Renter;
+              if (!existingRenterData.userId) {
+                await setDoc(doc(db, 'renters', renterId), { userId: user.uid }, { merge: true });
+              }
+            } else if (!userSnap?.exists() || !(userSnap?.data() as UserProfile)?.renterId) {
+              // Only create a new renter record if no existing record found at all
+              renterId = `renter_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
+              const newRenter: Renter = {
+                id: renterId,
+                fullName: user.displayName || userEmail.split('@')[0] || 'Resident Applicant',
+                phone: user.phoneNumber || '',
+                email: userEmail,
+                govIdType: 'Aadhaar Card',
+                govIdNumber: 'Pending KYC Verification',
+                emergencyContactName: '',
+                emergencyContactPhone: '',
+                emergencyContactRelation: '',
+                permanentAddress: 'Registered via Google Sign-In',
+                occupation: 'Resident',
+                workplace: 'Not specified',
+                buildingId: BUILDING_ID,
+                userId: user.uid,
+                roomId: null,
+                roomNumber: null,
+                monthlyRent: 0,
+                securityDeposit: 0,
+                leaseStartDate: new Date().toISOString().split('T')[0],
+                status: 'pending_approval',
+                createdAt: new Date().toISOString(),
+                updatedAt: new Date().toISOString()
+              };
+              await setDoc(doc(db, 'renters', renterId), sanitizeForFirestore(newRenter));
             }
-          } else if (!userSnap.exists() || !(userSnap.data() as UserProfile).renterId) {
-            // Only create a new renter record if no existing record found at all
-            renterId = `renter_${Date.now()}_${Math.random().toString(36).substring(2, 6)}`;
-            const newRenter: Renter = {
-              id: renterId,
-              fullName: user.displayName || userEmail.split('@')[0] || 'Resident Applicant',
-              phone: user.phoneNumber || '',
-              email: userEmail,
-              govIdType: 'Aadhaar Card',
-              govIdNumber: 'Pending KYC Verification',
-              emergencyContactName: '',
-              emergencyContactPhone: '',
-              emergencyContactRelation: '',
-              permanentAddress: 'Registered via Google Sign-In',
-              occupation: 'Resident',
-              workplace: 'Not specified',
-              buildingId: BUILDING_ID,
-              userId: user.uid,
-              roomId: null,
-              roomNumber: null,
-              monthlyRent: 0,
-              securityDeposit: 0,
-              leaseStartDate: new Date().toISOString().split('T')[0],
-              status: 'pending_approval',
-              createdAt: new Date().toISOString(),
-              updatedAt: new Date().toISOString()
-            };
-            await setDoc(doc(db, 'renters', renterId), sanitizeForFirestore(newRenter));
+          } catch (e) {
+            console.warn('Could not query/create renter record:', e);
           }
         }
       } else if (!isOwner && skipRenterCreation) {
-        // After registerRenterAccount: user doc and renter doc already written, just read renterId
-        if (userSnap.exists()) {
+        if (userSnap?.exists()) {
           const existingData = userSnap.data() as UserProfile;
           renterId = existingData.renterId || null;
         }
@@ -143,7 +152,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
       const assignedRole: UserRole = isOwner ? 'owner' : 'renter';
 
-      if (userSnap.exists()) {
+      if (userSnap?.exists()) {
         const data = userSnap.data() as UserProfile;
         const finalRenterId = renterId || data.renterId || null;
 
@@ -183,7 +192,8 @@ export function AuthProvider({ children }: { children: ReactNode }) {
           newProfile.phone = user.phoneNumber;
         }
 
-        await setDoc(userRef, sanitizeForFirestore(newProfile));
+        // Try to save, but don't block if Firestore is down
+        try { await setDoc(userRef, sanitizeForFirestore(newProfile)); } catch {}
         setProfile(newProfile as UserProfile);
         setRole(assignedRole);
       }
@@ -204,37 +214,68 @@ export function AuthProvider({ children }: { children: ReactNode }) {
 
   // Listen to Firebase Auth state
   useEffect(() => {
+    // Safety net: if Firebase hangs for >8s, stop loading anyway
+    const safetyTimer = setTimeout(() => {
+      setLoading((prev) => {
+        if (prev) {
+          console.warn('AuthContext: loading timed out after 8s, forcing false');
+          return false;
+        }
+        return prev;
+      });
+    }, 8000);
+
     const unsubscribe = onAuthStateChanged(auth, async (user) => {
+      clearTimeout(safetyTimer);
       setCurrentUser(user);
-      if (user) {
-        // If this auth event was triggered by registerRenterAccount, skip re-creating renter docs
-        const skipCreation = justRegisteredRenterRef.current?.uid === user.uid;
-        if (skipCreation) {
-          // Set profile directly from the flag's data — docs already written by registerRenterAccount
-          const registeredRef = justRegisteredRenterRef.current!;
+      try {
+        if (user) {
+          // If this auth event was triggered by registerRenterAccount, skip re-creating renter docs
+          const skipCreation = justRegisteredRenterRef.current?.uid === user.uid;
+          if (skipCreation) {
+            const registeredRef = justRegisteredRenterRef.current!;
+            setProfile({
+              uid: user.uid,
+              email: (user.email || '').toLowerCase(),
+              name: user.displayName || (user.email || '').split('@')[0] || 'Resident Applicant',
+              role: 'renter',
+              renterId: registeredRef.renterId,
+              approvalStatus: 'pending',
+              createdAt: new Date().toISOString()
+            });
+            setRole('renter');
+            justRegisteredRenterRef.current = null;
+          } else {
+            await syncUserProfile(user);
+          }
+        } else {
+          setProfile(null);
+          setRole('renter');
+          setRenterRecord(null);
+        }
+      } catch (err) {
+        console.error('AuthContext: onAuthStateChanged error:', err);
+        // Still set a basic profile so the app doesn't stay stuck
+        if (user) {
+          const isOwnerFallback = isOwnerEmail(user.email);
           setProfile({
             uid: user.uid,
-            email: (user.email || '').toLowerCase(),
-            name: user.displayName || (user.email || '').split('@')[0] || 'Resident Applicant',
-            role: 'renter',
-            renterId: registeredRef.renterId,
-            approvalStatus: 'pending',
-            createdAt: new Date().toISOString()
+            email: user.email || '',
+            name: isOwnerFallback ? 'Prem Niwas Owner' : 'Resident Applicant',
+            role: isOwnerFallback ? 'owner' : 'renter',
+            approvalStatus: isOwnerFallback ? 'approved' : 'pending'
           });
-          setRole('renter');
-          justRegisteredRenterRef.current = null;
-        } else {
-          await syncUserProfile(user);
+          setRole(isOwnerFallback ? 'owner' : 'renter');
         }
-      } else {
-        setProfile(null);
-        setRole('renter');
-        setRenterRecord(null);
+      } finally {
+        setLoading(false);
       }
-      setLoading(false);
     });
 
-    return () => unsubscribe();
+    return () => {
+      clearTimeout(safetyTimer);
+      unsubscribe();
+    };
   }, []);
 
   // Update associated renter record when profile or renters list changes
