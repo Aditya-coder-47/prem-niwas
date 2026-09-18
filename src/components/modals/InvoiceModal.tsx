@@ -131,23 +131,23 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                 <tr>
                   <th className="py-2.5 px-4">Description</th>
                   <th className="py-2.5 px-4 text-center">Details</th>
-                  <th className="py-2.5 px-4 text-right">Amount (â‚¹)</th>
+                  <th className="py-2.5 px-4 text-right">Amount (₹)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-150 text-slate-800">
                 <tr>
                   <td className="py-2.5 px-4 font-medium">Monthly Room Rent</td>
                   <td className="py-2.5 px-4 text-center text-slate-500">Room {bill.roomNumber}</td>
-                  <td className="py-2.5 px-4 text-right font-medium">â‚¹{(bill.rent ?? bill.rentAmount ?? 0).toLocaleString('en-IN')}</td>
+                  <td className="py-2.5 px-4 text-right font-medium">₹{(bill.rent ?? bill.rentAmount ?? 0).toLocaleString('en-IN')}</td>
                 </tr>
 
                 {Number(bill.electricityTotal || 0) > 0 && (
                   <tr>
                     <td className="py-2.5 px-4 font-medium">Electricity Charges</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">
-                      {bill.electricityUnits || 0} units @ â‚¹{bill.electricityRate || 8}/unit
+                      {bill.electricityUnits || 0} units @ ₹{bill.electricityRate || 8}/unit
                     </td>
-                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{(bill.electricityTotal || 0).toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">₹{(bill.electricityTotal || 0).toLocaleString('en-IN')}</td>
                   </tr>
                 )}
 
@@ -155,7 +155,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   <tr>
                     <td className="py-2.5 px-4 font-medium">Water Supply & Overhead</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">Fixed Monthly</td>
-                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{bill.waterCharges?.toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">₹{bill.waterCharges?.toLocaleString('en-IN')}</td>
                   </tr>
                 )}
 
@@ -163,7 +163,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   <tr>
                     <td className="py-2.5 px-4 font-medium">Building Maintenance & WiFi</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">Common Amenities</td>
-                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{bill.maintenanceCharges?.toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">₹{bill.maintenanceCharges?.toLocaleString('en-IN')}</td>
                   </tr>
                 )}
 
@@ -171,7 +171,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   <tr>
                     <td className="py-2.5 px-4 font-medium">{bill.otherChargesDesc || 'Other Services / Miscellaneous'}</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">Extra Charges</td>
-                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{bill.otherCharges?.toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">₹{bill.otherCharges?.toLocaleString('en-IN')}</td>
                   </tr>
                 )}
               </tbody>
@@ -179,7 +179,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                 <tr>
                   <td colSpan={2} className="py-3 px-4 text-slate-900 text-sm">TOTAL PAYABLE</td>
                   <td className="py-3 px-4 text-right text-base text-slate-950 font-black">
-                    â‚¹{bill.totalAmount.toLocaleString('en-IN')}
+                    ₹{bill.totalAmount.toLocaleString('en-IN')}
                   </td>
                 </tr>
               </tfoot>

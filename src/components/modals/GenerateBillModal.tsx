@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   X, 
   Receipt, 
@@ -153,12 +153,12 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
 
     // Rule 9, 21, 43: For meter-based billing, electricity calculation is pending meter approval.
     if (isMeterBased && !approvedReading && customElecUnits === '') {
-      setErrorMsg('Electricity calculation pending meter approval. Please approve the tenantâ€™s meter reading first, or enter verified units.');
+      setErrorMsg("Electricity calculation pending meter approval. Please approve the tenant's meter reading first, or enter verified units.");
       return;
     }
 
     if (totalAmount <= 0) {
-      setErrorMsg('Total bill amount must be greater than â‚¹0.');
+      setErrorMsg('Total bill amount must be greater than ₹0.');
       return;
     }
 
@@ -247,7 +247,7 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
               >
                 {activeRenters.map((r) => (
                   <option key={r.id} value={r.id}>
-                    Room {r.roomNumber} â€” {r.fullName} ({r.electricityBillingType === 'included_in_rent' ? 'Elec Included' : 'Metered'})
+                    Room {r.roomNumber} — {r.fullName} ({r.electricityBillingType === 'included_in_rent' ? 'Elec Included' : 'Metered'})
                   </option>
                 ))}
               </select>
@@ -313,7 +313,7 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
                   </div>
 
                   <div>
-                    <span className="text-slate-500 block text-[10px] uppercase font-bold">Rate (â‚¹/unit)</span>
+                    <span className="text-slate-500 block text-[10px] uppercase font-bold">Rate (₹/unit)</span>
                     <input
                       type="number"
                       min="1"
@@ -326,14 +326,14 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
                   <div className="text-right">
                     <span className="text-slate-500 block text-[10px] uppercase font-bold">Electricity Total</span>
                     <span className="text-base font-black text-amber-900 block mt-1">
-                      â‚¹{electricityAmount.toLocaleString('en-IN')}
+                      ₹{electricityAmount.toLocaleString('en-IN')}
                     </span>
                   </div>
                 </div>
               </div>
             ) : (
               <p className="text-slate-600 italic">
-                Tenant's agreement includes electricity within room rent. Separate electricity charge is set to â‚¹0.
+                Tenant's agreement includes electricity within room rent. Separate electricity charge is set to ₹0.
               </p>
             )}
           </div>
@@ -347,7 +347,7 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
             <div className="grid grid-cols-3 gap-3">
               <div>
                 <label className="block text-slate-600 font-bold mb-1">
-                  Room Rent (â‚¹)
+                  Room Rent (₹)
                 </label>
                 <input
                   type="number"
@@ -362,7 +362,7 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
 
               <div>
                 <label className="block text-slate-600 font-bold mb-1">
-                  Water & Maint. (â‚¹)
+                  Water & Maint. (₹)
                 </label>
                 <input
                   type="number"
@@ -377,7 +377,7 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
 
               <div>
                 <label className="block text-slate-600 font-bold mb-1">
-                  Back Dues (â‚¹)
+                  Back Dues (₹)
                 </label>
                 <input
                   type="number"
@@ -408,7 +408,7 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
 
             <div>
               <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1">
-                Payment Due Date (1stâ€“10th)
+                Payment Due Date (1st–10th)
               </label>
               <input
                 type="date"
@@ -427,10 +427,10 @@ export const GenerateBillModal: React.FC<GenerateBillModalProps> = ({
                 Total Calculated Statement
               </span>
               <div className="text-3xl font-black text-white mt-0.5">
-                â‚¹{totalAmount.toLocaleString('en-IN')}
+                ₹{totalAmount.toLocaleString('en-IN')}
               </div>
               <p className="text-[10px] text-slate-400 mt-1">
-                Subtotal: â‚¹{subtotal.toLocaleString('en-IN')} + Back Dues: â‚¹{backDues.toLocaleString('en-IN')}
+                Subtotal: ₹{subtotal.toLocaleString('en-IN')} + Back Dues: ₹{backDues.toLocaleString('en-IN')}
               </p>
             </div>
 

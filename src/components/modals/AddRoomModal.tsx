@@ -176,10 +176,10 @@ export const AddRoomModal: React.FC<AddRoomModalProps> = ({
           <div>
             <label className="block text-xs font-semibold text-slate-300 mb-1.5 flex items-center space-x-1.5">
               <IndianRupee className="w-3.5 h-3.5 text-amber-400" />
-              <span>Base Monthly Rent (â‚¹) *</span>
+              <span>Base Monthly Rent (₹) *</span>
             </label>
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold">â‚¹</span>
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 text-sm font-semibold">₹</span>
               <input
                 id="input-room-base-rent"
                 type="number"

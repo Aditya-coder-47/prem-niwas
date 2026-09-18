@@ -14,7 +14,10 @@ import {
   ShieldCheck,
   AlertCircle,
   UserPlus,
-  X
+  X,
+  Layers,
+  Sparkles,
+  ChevronRight
 } from 'lucide-react';
 import { Room, Renter, ActivityLog, Notice } from '../../types';
 
@@ -77,209 +80,230 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
   }, [pendingApplicants.length]);
 
   return (
-    <div className="space-y-6 pb-20 md:pb-12">
+    <div className="space-y-5 sm:space-y-6 pb-6">
 
       {/* ===== NEW APPLICANT LIVE TOAST ===== */}
       {toastApplicant && (
-        <div className="fixed top-20 right-4 z-50 w-80 bg-white border border-amber-400 rounded-2xl shadow-2xl p-4 animate-slide-in-right flex flex-col gap-2"
-          style={{ animation: 'slideInRight 0.4s ease-out' }}>
-          <style>{`
-            @keyframes slideInRight {
-              from { transform: translateX(120%); opacity: 0; }
-              to   { transform: translateX(0);   opacity: 1; }
-            }
-          `}</style>
+        <div className="fixed top-20 right-4 z-50 w-84 max-w-[calc(100vw-2rem)] bg-white border-2 border-amber-400 rounded-2xl shadow-2xl p-4 flex flex-col gap-2.5 transition-all">
           <div className="flex items-start justify-between">
-            <div className="flex items-center space-x-2">
-              <div className="w-9 h-9 rounded-xl bg-amber-500 flex items-center justify-center flex-shrink-0">
-                <UserPlus className="w-5 h-5 text-slate-950" />
+            <div className="flex items-center space-x-2.5">
+              <div className="w-10 h-10 rounded-xl bg-gradient-to-br from-amber-400 to-amber-600 flex items-center justify-center flex-shrink-0 shadow-md text-slate-950">
+                <UserPlus className="w-5 h-5" />
               </div>
               <div>
-                <p className="text-xs font-extrabold text-amber-700 uppercase tracking-wide">New Application!</p>
-                <p className="font-bold text-slate-900 text-sm leading-snug">{toastApplicant.fullName}</p>
-                <p className="text-xs text-slate-500">{toastApplicant.email}</p>
+                <span className="text-[10px] font-extrabold text-amber-700 uppercase tracking-wider bg-amber-100 px-2 py-0.5 rounded-full">
+                  New Application!
+                </span>
+                <p className="font-extrabold text-slate-900 text-sm mt-0.5 leading-snug">{toastApplicant.fullName}</p>
+                <p className="text-[11px] text-slate-500 truncate max-w-[180px]">{toastApplicant.email}</p>
               </div>
             </div>
-            <button onClick={() => setToastApplicant(null)} className="text-slate-400 hover:text-slate-700 ml-2 mt-0.5 flex-shrink-0">
+            <button 
+              onClick={() => setToastApplicant(null)} 
+              className="text-slate-400 hover:text-slate-700 p-1 rounded-lg hover:bg-slate-100 flex-shrink-0"
+            >
               <X className="w-4 h-4" />
             </button>
           </div>
-          <p className="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5">
-            Pending your approval — verify KYC &amp; allot a room to grant portal access.
+          <p className="text-xs text-slate-600 bg-amber-50/80 border border-amber-200/70 rounded-xl p-2.5">
+            Awaiting your approval — verify KYC &amp; allot room to grant portal access.
           </p>
           <button
             onClick={() => { setToastApplicant(null); onNavigateTab('renters', 'pending_approval'); }}
-            className="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-colors"
+            className="w-full py-2 bg-gradient-to-r from-amber-400 to-amber-500 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-extrabold text-xs rounded-xl shadow-md transition-all active:scale-98"
           >
-            Review Now →
+            Review &amp; Allot Now →
           </button>
         </div>
       )}
 
-      {/* Welcome Banner */}
+      {/* ===== EXECUTIVE HERO COMMAND BANNER ===== */}
+      <div className="relative overflow-hidden bg-gradient-to-br from-slate-950 via-slate-900 to-slate-950 border border-slate-800/90 rounded-2xl sm:rounded-3xl p-5 sm:p-7 text-white shadow-xl">
+        {/* Subtle Ambient Background Accents */}
+        <div className="absolute -top-20 -right-20 w-64 h-64 bg-amber-500/10 rounded-full blur-3xl pointer-events-none" />
+        <div className="absolute -bottom-20 -left-20 w-64 h-64 bg-emerald-500/10 rounded-full blur-3xl pointer-events-none" />
 
-      <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700/60 rounded-xl p-6 text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
-        <div>
-          <div className="flex items-center space-x-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
-            <Building2 className="w-4 h-4" />
-            <span>Building Control Dashboard</span>
+        <div className="relative z-10 flex flex-col md:flex-row md:items-center justify-between gap-5">
+          <div>
+            <div className="inline-flex items-center space-x-2 bg-amber-500/15 border border-amber-500/30 text-amber-300 text-[11px] font-bold uppercase tracking-wider px-3 py-1 rounded-full mb-2">
+              <Building2 className="w-3.5 h-3.5 text-amber-400" />
+              <span>Building Control &amp; Operations</span>
+            </div>
+            <h1 className="text-2xl sm:text-3xl font-black tracking-tight text-white font-sans">
+              PREM <span className="text-transparent bg-clip-text bg-gradient-to-r from-amber-300 to-amber-500">NIWAS</span>
+            </h1>
+            <p className="text-xs sm:text-sm text-slate-300 mt-1 max-w-xl font-normal leading-relaxed">
+              Real-time occupancy tracking, tenant KYC, automatic billing, and unit operations for all {totalRooms} residential suites.
+            </p>
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">
-            PREM NIWAS
-          </h1>
-          <p className="text-sm text-slate-300 mt-1 max-w-xl">
-            Overview of occupancy, tenant allocations, and operational notices for {totalRooms} residential units.
-          </p>
-        </div>
 
-        {/* Quick actions */}
-        <div className="flex flex-wrap gap-2.5">
-          <button
-            id="owner-dash-register-renter-btn"
-            onClick={onOpenRegisterModal}
-            className="flex items-center space-x-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold px-4 py-2 rounded-lg text-sm transition-colors shadow-sm"
-          >
-            <Plus className="w-4 h-4" />
-            <span>Register Renter</span>
-          </button>
-          <button
-            id="owner-dash-post-notice-btn"
-            onClick={onOpenNoticeModal}
-            className="flex items-center space-x-2 bg-slate-800 hover:bg-slate-700 text-slate-200 border border-slate-600 font-medium px-4 py-2 rounded-lg text-sm transition-colors"
-          >
-            <Bell className="w-4 h-4" />
-            <span>Post Notice</span>
-          </button>
+          {/* Quick Action Buttons */}
+          <div className="flex flex-wrap sm:flex-nowrap gap-2.5 w-full sm:w-auto">
+            <button
+              id="owner-dash-register-renter-btn"
+              onClick={onOpenRegisterModal}
+              className="flex-1 sm:flex-initial flex items-center justify-center space-x-2 bg-gradient-to-r from-amber-400 via-amber-500 to-amber-600 hover:from-amber-500 hover:to-amber-600 text-slate-950 font-extrabold px-4 sm:px-5 py-2.5 rounded-xl text-xs sm:text-sm shadow-lg shadow-amber-500/25 active:scale-95 transition-all cursor-pointer"
+            >
+              <Plus className="w-4 h-4 stroke-[3]" />
+              <span>Register Renter</span>
+            </button>
+            <button
+              id="owner-dash-post-notice-btn"
+              onClick={onOpenNoticeModal}
+              className="flex-1 sm:flex-initial flex items-center justify-center space-x-2 bg-slate-800/90 hover:bg-slate-700 text-slate-100 border border-slate-700 font-bold px-4 py-2.5 rounded-xl text-xs sm:text-sm active:scale-95 transition-all cursor-pointer shadow-sm"
+            >
+              <Bell className="w-4 h-4 text-amber-400" />
+              <span>Post Notice</span>
+            </button>
+          </div>
         </div>
       </div>
 
-      {/* Pending Applications Banner if any exist */}
+      {/* ===== PENDING APPLICANTS HIGH-PRIORITY ALERT ===== */}
       {pendingApplicants.length > 0 && (
-        <div className="bg-amber-50 border border-amber-300 rounded-xl p-4 flex flex-col sm:flex-row sm:items-center justify-between gap-3 shadow-sm">
-          <div className="flex items-center space-x-3">
-            <div className="w-10 h-10 rounded-full bg-amber-500 text-slate-950 font-extrabold flex items-center justify-center flex-shrink-0 text-sm">
+        <div className="bg-gradient-to-r from-amber-50 via-amber-100/50 to-amber-50 border-2 border-amber-300/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 shadow-sm">
+          <div className="flex items-start sm:items-center space-x-3.5">
+            <div className="w-10 h-10 rounded-2xl bg-amber-500 text-slate-950 font-black flex items-center justify-center flex-shrink-0 text-sm shadow-md shadow-amber-500/30 animate-pulse">
               {pendingApplicants.length}
             </div>
             <div>
-              <h4 className="font-bold text-slate-900 text-sm flex items-center space-x-1.5">
-                <span>{pendingApplicants.length} Resident Application{pendingApplicants.length > 1 ? 's' : ''} Pending Your Approval</span>
+              <h4 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center space-x-2">
+                <span>{pendingApplicants.length} Resident Application{pendingApplicants.length > 1 ? 's' : ''} Pending Review</span>
+                <span className="text-[10px] bg-amber-200 text-amber-950 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
+                  Action Required
+                </span>
               </h4>
               <p className="text-xs text-slate-600 mt-0.5">
-                Prospective tenants registered online. Verify identity and allot vacant rooms to grant them portal access.
+                Prospective residents have signed up. Verify their identity/KYC and allot vacant rooms to grant portal access.
               </p>
             </div>
           </div>
           <button
             id="view-pending-applicants-btn"
             onClick={() => onNavigateTab('renters', 'pending_approval')}
-            className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-lg shadow-sm whitespace-nowrap transition-colors"
+            className="w-full sm:w-auto px-4 py-2.5 bg-slate-950 hover:bg-slate-900 text-amber-400 text-xs font-extrabold rounded-xl shadow-md whitespace-nowrap transition-all active:scale-95 flex items-center justify-center space-x-1.5"
           >
-            Review & Allot Units â†’
+            <span>Review &amp; Allot Units</span>
+            <ArrowRight className="w-3.5 h-3.5" />
           </button>
         </div>
       )}
 
-      {/* KPI Cards Grid */}
-      <div className="grid grid-cols-2 lg:grid-cols-4 gap-4">
-        {/* Total & Occupancy */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Occupancy</span>
-            <div className="w-8 h-8 rounded-lg bg-emerald-50 text-emerald-600 flex items-center justify-center">
-              <Percent className="w-4 h-4" />
+      {/* ===== 4 KPI METRIC CARDS ===== */}
+      <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+        {/* Card 1: Total & Occupancy */}
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 sm:p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Occupancy</span>
+              <div className="w-8 h-8 rounded-xl bg-emerald-50 text-emerald-600 flex items-center justify-center border border-emerald-100">
+                <Percent className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="mt-2.5 flex items-baseline space-x-1.5 flex-wrap">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{occupancyRate}%</span>
+              <span className="text-xs text-slate-500 font-medium">({occupiedRooms}/{totalRooms})</span>
             </div>
           </div>
-          <div className="mt-3 flex items-baseline space-x-2">
-            <span className="text-2xl sm:text-3xl font-bold text-slate-900">{occupancyRate}%</span>
-            <span className="text-xs text-slate-500">({occupiedRooms} of 15)</span>
-          </div>
-          <div className="mt-3 w-full bg-slate-100 rounded-full h-2 overflow-hidden">
-            <div 
-              className="bg-emerald-500 h-2 rounded-full transition-all duration-500"
-              style={{ width: `${occupancyRate}%` }}
-            />
+          <div className="mt-3">
+            <div className="w-full bg-slate-100 rounded-full h-2 overflow-hidden">
+              <div 
+                className="bg-gradient-to-r from-emerald-500 to-teal-500 h-2 rounded-full transition-all duration-500"
+                style={{ width: `${occupancyRate}%` }}
+              />
+            </div>
+            <p className="text-[10px] text-slate-400 mt-1 font-medium text-right">{occupiedRooms} units active</p>
           </div>
         </div>
 
-        {/* Vacant Rooms */}
+        {/* Card 2: Vacant Rooms */}
         <div 
           onClick={() => onNavigateTab('rooms', 'vacant')}
-          className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm cursor-pointer hover:border-amber-400 transition-colors group"
+          className="bg-white border border-slate-200/90 hover:border-amber-400/80 rounded-2xl p-3.5 sm:p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between active:scale-98"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Vacant Units</span>
-            <div className="w-8 h-8 rounded-lg bg-amber-50 text-amber-600 flex items-center justify-center">
-              <DoorOpen className="w-4 h-4" />
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Vacant Units</span>
+              <div className="w-8 h-8 rounded-xl bg-amber-50 text-amber-600 flex items-center justify-center border border-amber-100 group-hover:scale-105 transition-transform">
+                <DoorOpen className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="mt-2.5 flex items-baseline space-x-1.5 flex-wrap">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{vacantRooms}</span>
+              <span className="text-[11px] text-amber-800 font-bold bg-amber-50 border border-amber-200 px-2 py-0.5 rounded-md">
+                Ready
+              </span>
             </div>
           </div>
-          <div className="mt-3 flex items-baseline space-x-2">
-            <span className="text-2xl sm:text-3xl font-bold text-slate-900">{vacantRooms}</span>
-            <span className="text-xs text-amber-700 font-medium bg-amber-50 px-2 py-0.5 rounded">
-              Ready to allot
-            </span>
-          </div>
-          <div className="mt-3 flex items-center text-xs text-amber-600 font-medium group-hover:underline">
+          <div className="mt-3 flex items-center text-xs text-amber-700 font-bold group-hover:text-amber-800 transition-colors">
             <span>View vacant rooms</span>
-            <ArrowRight className="w-3 h-3 ml-1" />
+            <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </div>
 
-        {/* Active Renters */}
+        {/* Card 3: Active Renters */}
         <div 
           onClick={() => onNavigateTab('renters', 'active')}
-          className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm cursor-pointer hover:border-blue-400 transition-colors group"
+          className="bg-white border border-slate-200/90 hover:border-blue-400/80 rounded-2xl p-3.5 sm:p-5 shadow-sm hover:shadow-md transition-all cursor-pointer group flex flex-col justify-between active:scale-98"
         >
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Active Renters</span>
-            <div className="w-8 h-8 rounded-lg bg-blue-50 text-blue-600 flex items-center justify-center">
-              <Users className="w-4 h-4" />
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Active Renters</span>
+              <div className="w-8 h-8 rounded-xl bg-blue-50 text-blue-600 flex items-center justify-center border border-blue-100 group-hover:scale-105 transition-transform">
+                <Users className="w-4 h-4" />
+              </div>
+            </div>
+            <div className="mt-2.5 flex items-baseline space-x-1.5 flex-wrap">
+              <span className="text-2xl sm:text-3xl font-black text-slate-900 tracking-tight">{activeRenters.length}</span>
+              <span className="text-xs text-slate-500 font-medium">Tenants</span>
             </div>
           </div>
-          <div className="mt-3 flex items-baseline space-x-2">
-            <span className="text-2xl sm:text-3xl font-bold text-slate-900">{activeRenters.length}</span>
-            <span className="text-xs text-slate-500">Tenants</span>
-          </div>
-          <div className="mt-3 flex items-center text-xs text-blue-600 font-medium group-hover:underline">
+          <div className="mt-3 flex items-center text-xs text-blue-600 font-bold group-hover:text-blue-700 transition-colors">
             <span>Open directory</span>
-            <ArrowRight className="w-3 h-3 ml-1" />
+            <ArrowRight className="w-3 h-3 ml-1 group-hover:translate-x-0.5 transition-transform" />
           </div>
         </div>
 
-        {/* Monthly Rental Inflow */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm">
-          <div className="flex items-center justify-between">
-            <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Monthly Rent Roll</span>
-            <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm">
-              â‚¹
+        {/* Card 4: Monthly Rent Roll */}
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-3.5 sm:p-5 shadow-sm hover:shadow-md transition-all flex flex-col justify-between">
+          <div>
+            <div className="flex items-center justify-between">
+              <span className="text-[11px] font-bold text-slate-500 uppercase tracking-wider">Monthly Rent Roll</span>
+              <div className="w-8 h-8 rounded-xl bg-indigo-50 text-indigo-600 flex items-center justify-center border border-indigo-100 font-black text-sm">
+                ₹
+              </div>
+            </div>
+            <div className="mt-2.5 flex items-baseline space-x-1">
+              <span className="text-xl sm:text-2xl md:text-3xl font-black text-slate-900 tracking-tight">
+                ₹{currentMonthlyRent.toLocaleString('en-IN')}
+              </span>
             </div>
           </div>
-          <div className="mt-3 flex items-baseline space-x-1">
-            <span className="text-2xl sm:text-3xl font-bold text-slate-900">
-              â‚¹{currentMonthlyRent.toLocaleString('en-IN')}
-            </span>
-          </div>
-          <div className="mt-2 text-xs text-slate-500">
-            Potential full rent: â‚¹{potentialMonthlyRent.toLocaleString('en-IN')}
+          <div className="mt-3 text-[11px] text-slate-500 font-medium truncate">
+            Full capacity: <span className="font-bold text-slate-700">₹{potentialMonthlyRent.toLocaleString('en-IN')}</span>
           </div>
         </div>
       </div>
 
-      {/* Building Layout Visualizer (Floors 0, 1, 2) */}
-      <div className="bg-white border border-slate-200 rounded-xl p-6 shadow-sm">
-        <div className="flex items-center justify-between mb-4">
+      {/* ===== BUILDING UNIT STATUS MAP (15 Rooms by Floor) ===== */}
+      <div className="bg-white border border-slate-200/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 shadow-sm">
+        <div className="flex flex-col sm:flex-row sm:items-center justify-between gap-2.5 mb-4 pb-3 border-b border-slate-100">
           <div>
-            <h2 className="text-base font-bold text-slate-900">Building Unit Status (15 Rooms)</h2>
+            <h2 className="text-base sm:text-lg font-black text-slate-900 flex items-center space-x-2">
+              <Layers className="w-5 h-5 text-amber-500" />
+              <span>Building Floor Map ({totalRooms} Units)</span>
+            </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Click any room for tenant details, re-assignment, or rapid allotment.
+              Click any unit badge to assign room, inspect resident profile, or reallocate.
             </p>
           </div>
           <div className="flex items-center space-x-3 text-xs">
-            <span className="flex items-center text-slate-600">
-              <span className="w-2.5 h-2.5 rounded-full bg-emerald-500 mr-1.5"></span>
+            <span className="flex items-center text-slate-700 font-semibold bg-emerald-50 border border-emerald-200/80 px-2.5 py-1 rounded-xl">
+              <span className="w-2 h-2 rounded-full bg-emerald-500 mr-1.5 animate-pulse"></span>
               Occupied ({occupiedRooms})
             </span>
-            <span className="flex items-center text-slate-600">
-              <span className="w-2.5 h-2.5 rounded-full bg-amber-400 mr-1.5"></span>
+            <span className="flex items-center text-slate-700 font-semibold bg-amber-50 border border-amber-200/80 px-2.5 py-1 rounded-xl">
+              <span className="w-2 h-2 rounded-full bg-amber-400 mr-1.5"></span>
               Vacant ({vacantRooms})
             </span>
           </div>
@@ -288,61 +312,77 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
         {/* Floor Breakdown */}
         <div className="space-y-4">
           {/* 2nd Floor: Rooms 11-15 */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>2nd Floor â€¢ Rooms 11 to 15</span>
-              <span className="text-[11px] text-slate-500 font-normal">Top Floor</span>
+          <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 sm:p-4">
+            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-indigo-500"></span>
+                <span>2nd Floor • Rooms 11 to 15</span>
+              </div>
+              <span className="text-[10px] text-indigo-700 bg-indigo-50 border border-indigo-200 font-bold px-2 py-0.5 rounded-full">
+                Top Floor
+              </span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
               {secondFloorRooms.map(room => renderRoomBadge(room, onSelectRoom))}
             </div>
           </div>
 
           {/* 1st Floor: Rooms 6-10 */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>1st Floor â€¢ Rooms 6 to 10</span>
-              <span className="text-[11px] text-slate-500 font-normal">Middle Floor</span>
+          <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 sm:p-4">
+            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-blue-500"></span>
+                <span>1st Floor • Rooms 6 to 10</span>
+              </div>
+              <span className="text-[10px] text-blue-700 bg-blue-50 border border-blue-200 font-bold px-2 py-0.5 rounded-full">
+                Middle Floor
+              </span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
               {firstFloorRooms.map(room => renderRoomBadge(room, onSelectRoom))}
             </div>
           </div>
 
           {/* Ground Floor: Rooms 1-5 */}
-          <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
-            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>Ground Floor â€¢ Rooms 1 to 5</span>
-              <span className="text-[11px] text-slate-500 font-normal">Ground Level</span>
+          <div className="bg-slate-50/70 border border-slate-200/80 rounded-2xl p-3 sm:p-4">
+            <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2.5 flex items-center justify-between">
+              <div className="flex items-center space-x-2">
+                <span className="w-2 h-2 rounded-full bg-emerald-500"></span>
+                <span>Ground Floor • Rooms 1 to 5</span>
+              </div>
+              <span className="text-[10px] text-emerald-700 bg-emerald-50 border border-emerald-200 font-bold px-2 py-0.5 rounded-full">
+                Ground Level
+              </span>
             </div>
-            <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
+            <div className="grid grid-cols-2 sm:grid-cols-3 md:grid-cols-5 gap-2 sm:gap-3">
               {groundFloorRooms.map(room => renderRoomBadge(room, onSelectRoom))}
             </div>
           </div>
         </div>
       </div>
 
-      {/* Two Column Section: Recent Activity & Notices */}
-      <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
+      {/* ===== TWO COLUMN SECTION: RECENT ACTIVITY & NOTICES ===== */}
+      <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6">
         
-        {/* Recent Activity / Audit Log preview */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between">
+        {/* Recent Activity / Audit Log Preview */}
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
               <div className="flex items-center space-x-2">
                 <Clock className="w-4 h-4 text-slate-500" />
-                <h3 className="font-bold text-slate-900 text-sm">Recent Audit Activities</h3>
+                <h3 className="font-extrabold text-slate-900 text-sm">Recent Audit Activities</h3>
               </div>
               <button 
                 onClick={() => onNavigateTab('audit')}
-                className="text-xs text-amber-600 font-semibold hover:underline"
+                className="text-xs text-amber-600 font-bold hover:underline flex items-center"
               >
-                View full log
+                <span>View full log</span>
+                <ChevronRight className="w-3 h-3 ml-0.5" />
               </button>
             </div>
 
             {activityLogs.length === 0 ? (
-              <div className="py-6 text-center text-xs text-slate-400">
+              <div className="py-8 text-center text-xs text-slate-400">
                 No activity logs recorded yet.
               </div>
             ) : (
@@ -350,10 +390,12 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
                 {activityLogs.slice(0, 5).map(log => (
                   <div key={log.id} className="py-2.5 text-xs">
                     <div className="flex items-center justify-between text-slate-500 mb-0.5">
-                      <span className="font-semibold text-slate-700">{log.performedByName}</span>
-                      <span>{new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</span>
+                      <span className="font-bold text-slate-800">{log.performedByName}</span>
+                      <span className="text-[11px] text-slate-400">
+                        {new Date(log.timestamp).toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}
+                      </span>
                     </div>
-                    <p className="text-slate-800 font-medium">{log.description}</p>
+                    <p className="text-slate-700 font-medium leading-relaxed">{log.description}</p>
                   </div>
                 ))}
               </div>
@@ -362,42 +404,43 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
 
           <div className="mt-4 pt-3 border-t border-slate-100 text-[11px] text-slate-400 flex items-center justify-between">
             <span>Immutable Firestore Audit Trail</span>
-            <ShieldCheck className="w-3.5 h-3.5 text-slate-400" />
+            <ShieldCheck className="w-4 h-4 text-emerald-500" />
           </div>
         </div>
 
         {/* Building Notices Preview */}
-        <div className="bg-white border border-slate-200 rounded-xl p-5 shadow-sm flex flex-col justify-between">
+        <div className="bg-white border border-slate-200/90 rounded-2xl p-4 sm:p-5 shadow-sm flex flex-col justify-between">
           <div>
-            <div className="flex items-center justify-between mb-4">
+            <div className="flex items-center justify-between mb-3 pb-2.5 border-b border-slate-100">
               <div className="flex items-center space-x-2">
                 <Bell className="w-4 h-4 text-amber-500" />
-                <h3 className="font-bold text-slate-900 text-sm">Notice Board Announcements</h3>
+                <h3 className="font-extrabold text-slate-900 text-sm">Notice Board Announcements</h3>
               </div>
               <button 
                 onClick={() => onNavigateTab('notices')}
-                className="text-xs text-amber-600 font-semibold hover:underline"
+                className="text-xs text-amber-600 font-bold hover:underline flex items-center"
               >
-                Manage notices
+                <span>Manage notices</span>
+                <ChevronRight className="w-3 h-3 ml-0.5" />
               </button>
             </div>
 
             {notices.length === 0 ? (
-              <div className="py-6 text-center text-xs text-slate-400">
-                No notices published yet.
+              <div className="py-8 text-center text-xs text-slate-400">
+                No notices published yet. Click below to announce.
               </div>
             ) : (
-              <div className="space-y-3">
+              <div className="space-y-2.5">
                 {notices.slice(0, 3).map(notice => (
                   <div 
                     key={notice.id} 
-                    className="p-3 rounded-lg border border-slate-100 bg-slate-50/60 hover:bg-slate-50 transition-colors"
+                    className="p-3 rounded-xl border border-slate-200/70 bg-slate-50/70 hover:bg-slate-50 transition-colors"
                   >
                     <div className="flex items-center justify-between mb-1">
                       <span className="font-bold text-xs text-slate-900 truncate mr-2">
                         {notice.title}
                       </span>
-                      <span className="text-[10px] bg-slate-200 text-slate-700 px-1.5 py-0.5 rounded font-medium">
+                      <span className="text-[10px] bg-slate-200 text-slate-700 px-2 py-0.5 rounded-full font-bold">
                         {notice.category}
                       </span>
                     </div>
@@ -411,10 +454,10 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
           </div>
 
           <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between">
-            <span className="text-[11px] text-slate-500">Visible to all residents</span>
+            <span className="text-[11px] text-slate-500 font-medium">Visible to all residents</span>
             <button
               onClick={onOpenNoticeModal}
-              className="text-xs font-semibold text-slate-900 hover:text-amber-600 flex items-center"
+              className="text-xs font-bold text-slate-900 hover:text-amber-600 flex items-center"
             >
               <Plus className="w-3.5 h-3.5 mr-1" />
               <span>Create Announcement</span>
@@ -434,30 +477,30 @@ function renderRoomBadge(room: Room, onSelect: (room: Room) => void) {
     <button
       key={room.id}
       onClick={() => onSelect(room)}
-      className={`p-2.5 rounded-lg border text-left transition-all relative overflow-hidden group ${
+      className={`p-2.5 sm:p-3 rounded-xl border text-left transition-all relative overflow-hidden group cursor-pointer active:scale-95 ${
         isOccupied
-          ? 'bg-emerald-50/70 border-emerald-200 hover:border-emerald-400'
-          : 'bg-amber-50/60 border-amber-200 hover:border-amber-400'
+          ? 'bg-emerald-50/80 border-emerald-200 hover:border-emerald-400 hover:shadow-sm'
+          : 'bg-amber-50/70 border-amber-200 hover:border-amber-400 hover:shadow-sm'
       }`}
     >
       <div className="flex items-center justify-between mb-1">
-        <span className="font-extrabold text-sm text-slate-900 font-mono">
+        <span className="font-black text-xs sm:text-sm text-slate-900 font-mono">
           R-{room.roomNumber}
         </span>
-        <span className={`w-2 h-2 rounded-full ${isOccupied ? 'bg-emerald-500' : 'bg-amber-500'}`} />
+        <span className={`w-2 h-2 rounded-full ${isOccupied ? 'bg-emerald-500 ring-2 ring-emerald-200' : 'bg-amber-400 ring-2 ring-amber-200'}`} />
       </div>
       
-      <div className="text-[11px] font-medium text-slate-600 truncate">
+      <div className="text-[11px] font-bold text-slate-700 truncate my-0.5">
         {isOccupied ? (
-          <span className="text-emerald-900 font-semibold">{room.currentRenterName}</span>
+          <span className="text-emerald-900 font-semibold">{room.currentRenterName || 'Occupied'}</span>
         ) : (
-          <span className="text-amber-800 font-medium">Vacant</span>
+          <span className="text-amber-800 font-semibold">Vacant • Allot</span>
         )}
       </div>
 
-      <div className="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
-        <span>â‚¹{room.baseRent}</span>
-        <span className="text-slate-500 capitalize">{room.type.split(' ')[0]}</span>
+      <div className="text-[10px] text-slate-500 mt-1 flex items-center justify-between border-t border-slate-200/50 pt-1">
+        <span className="font-bold text-slate-800">₹{room.baseRent.toLocaleString('en-IN')}</span>
+        <span className="text-[10px] text-slate-400 capitalize">{room.type.split(' ')[0]}</span>
       </div>
     </button>
   );

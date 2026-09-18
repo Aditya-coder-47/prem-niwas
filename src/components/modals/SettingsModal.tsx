@@ -121,10 +121,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  Electricity Rate (â‚¹/unit)
+                  Electricity Rate (₹/unit)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">â‚¹</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">₹</span>
                   <input
                     type="number"
                     min="1"
@@ -135,15 +135,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     className="w-full pl-7 pr-3 py-2 bg-white border border-slate-300 rounded-xl font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 mt-0.5">PREM NIWAS default is â‚¹8/unit</p>
+                <p className="text-[10px] text-slate-500 mt-0.5">PREM NIWAS default is ₹8/unit</p>
               </div>
 
               <div>
                 <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  Default Water Charge (â‚¹)
+                  Default Water Charge (₹)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">â‚¹</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">₹</span>
                   <input
                     type="number"
                     min="0"
@@ -154,7 +154,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     className="w-full pl-7 pr-3 py-2 bg-white border border-slate-300 rounded-xl font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 mt-0.5">PREM NIWAS default is â‚¹300</p>
+                <p className="text-[10px] text-slate-500 mt-0.5">PREM NIWAS default is ₹300</p>
               </div>
 
               <div className="col-span-2">

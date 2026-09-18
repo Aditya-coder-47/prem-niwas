@@ -140,7 +140,7 @@ export const RegisterRenterModal: React.FC<RegisterRenterModalProps> = ({
           <div>
             <h2 className="text-lg font-bold text-slate-900 flex items-center space-x-2">
               <UserPlus className="w-5 h-5 text-amber-500" />
-              <span>Register New Renter â€” PREM NIWAS</span>
+              <span>Register New Renter — PREM NIWAS</span>
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
               Record tenant KYC information and allot a vacant residential room.
@@ -344,7 +344,7 @@ export const RegisterRenterModal: React.FC<RegisterRenterModalProps> = ({
                   >
                     {vacantRooms.map(r => (
                       <option key={r.id} value={r.id}>
-                        {r.roomName} â€” {r.floor} ({r.type}, Base: â‚¹{r.baseRent})
+                        {r.roomName} — {r.floor} ({r.type}, Base: ₹{r.baseRent})
                       </option>
                     ))}
                   </select>
@@ -366,7 +366,7 @@ export const RegisterRenterModal: React.FC<RegisterRenterModalProps> = ({
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Agreed Monthly Rent (â‚¹) *
+                  Agreed Monthly Rent (₹) *
                 </label>
                 <input
                   type="number"
@@ -381,7 +381,7 @@ export const RegisterRenterModal: React.FC<RegisterRenterModalProps> = ({
 
               <div>
                 <label className="block text-xs font-semibold text-slate-700 mb-1">
-                  Security Deposit Received (â‚¹) *
+                  Security Deposit Received (₹) *
                 </label>
                 <input
                   type="number"

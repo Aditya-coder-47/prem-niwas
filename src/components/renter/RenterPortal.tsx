@@ -177,7 +177,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
             Welcome, {renter.fullName}
           </h1>
           <p className="text-xs text-slate-300 mt-1">
-            Resident of <strong className="text-amber-400 font-mono">Room {renter.roomNumber || 'Pending'}</strong> â€¢ Prem Niwas Building
+            Resident of <strong className="text-amber-400 font-mono">Room {renter.roomNumber || 'Pending'}</strong> • Prem Niwas Building
           </p>
         </div>
 
@@ -196,7 +196,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
               className="bg-amber-500 hover:bg-amber-400 text-slate-950 px-3.5 py-2 rounded-xl text-xs font-bold transition-colors cursor-pointer flex items-center space-x-1"
             >
               <Receipt className="w-3.5 h-3.5" />
-              <span>â‚¹{totalOutstanding.toLocaleString('en-IN')} Due</span>
+              <span>₹{totalOutstanding.toLocaleString('en-IN')} Due</span>
             </button>
           )}
         </div>
@@ -219,7 +219,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                     <span>Statement for {currentBill.billingPeriod}</span>
                   </h3>
                   <p className="text-xs text-slate-500 mt-0.5">
-                    Due by <strong className="text-rose-600 font-semibold">{currentBill.dueDate || '10th of Month'}</strong> â€¢ Invoice #{currentBill.invoiceNumber}
+                    Due by <strong className="text-rose-600 font-semibold">{currentBill.dueDate || '10th of Month'}</strong> • Invoice #{currentBill.invoiceNumber}
                   </p>
                 </div>
 
@@ -249,7 +249,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4 text-xs">
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-[10px] text-slate-500 block uppercase font-bold">Room Rent</span>
-                  <span className="font-bold text-slate-900 text-sm">â‚¹{currentBill.rent.toLocaleString('en-IN')}</span>
+                  <span className="font-bold text-slate-900 text-sm">₹{currentBill.rent.toLocaleString('en-IN')}</span>
                 </div>
 
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
@@ -257,18 +257,18 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                   <span className="font-bold text-slate-900 text-sm">
                     {currentBill.electricityBillingType === 'included_in_rent'
                       ? 'Included'
-                      : `â‚¹${currentBill.electricityAmount.toLocaleString('en-IN')}`}
+                      : `₹${currentBill.electricityAmount.toLocaleString('en-IN')}`}
                   </span>
                 </div>
 
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-[10px] text-slate-500 block uppercase font-bold">Water & Utilities</span>
-                  <span className="font-bold text-slate-900 text-sm">â‚¹{currentBill.waterAmount.toLocaleString('en-IN')}</span>
+                  <span className="font-bold text-slate-900 text-sm">₹{currentBill.waterAmount.toLocaleString('en-IN')}</span>
                 </div>
 
                 <div className="bg-amber-50 p-3 rounded-xl border border-amber-200">
                   <span className="text-[10px] text-amber-800 block uppercase font-bold">Total Statement</span>
-                  <span className="font-black text-amber-950 text-base">â‚¹{currentBill.totalAmount.toLocaleString('en-IN')}</span>
+                  <span className="font-black text-amber-950 text-base">₹{currentBill.totalAmount.toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
@@ -277,7 +277,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                 <div className="text-xs text-slate-600">
                   {currentBill.remainingAmount > 0 ? (
                     <span>
-                      Remaining balance to clear: <strong className="text-rose-600 font-bold">â‚¹{currentBill.remainingAmount.toLocaleString('en-IN')}</strong>
+                      Remaining balance to clear: <strong className="text-rose-600 font-bold">₹{currentBill.remainingAmount.toLocaleString('en-IN')}</strong>
                     </span>
                   ) : (
                     <span className="text-emerald-700 font-semibold flex items-center">
@@ -334,7 +334,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                       Room {renter.roomNumber}
                     </span>
                     <span className="text-xs text-slate-600 mt-0.5 block">
-                      {assignedRoom?.floor || 'Ground Floor'} â€¢ {assignedRoom?.type || 'Residential Unit'}
+                      {assignedRoom?.floor || 'Ground Floor'} • {assignedRoom?.type || 'Residential Unit'}
                     </span>
                   </div>
 
@@ -343,10 +343,10 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                       Agreed Monthly Rent
                     </span>
                     <span className="text-2xl font-bold text-slate-900 mt-1 block">
-                      â‚¹{renter.monthlyRent?.toLocaleString('en-IN') || 0}<span className="text-xs text-slate-500 font-normal"> / mo</span>
+                      ₹{renter.monthlyRent?.toLocaleString('en-IN') || 0}<span className="text-xs text-slate-500 font-normal"> / mo</span>
                     </span>
                     <span className="text-xs text-slate-600 mt-0.5 block">
-                      Payment due on 1stâ€“10th of each month
+                      Payment due on 1st–10th of each month
                     </span>
                   </div>
 
@@ -355,7 +355,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                       Security Deposit
                     </span>
                     <span className="text-2xl font-bold text-slate-900 mt-1 block">
-                      â‚¹{renter.securityDeposit?.toLocaleString('en-IN') || 0}
+                      ₹{renter.securityDeposit?.toLocaleString('en-IN') || 0}
                     </span>
                     <span className="text-xs text-emerald-700 mt-0.5 font-medium flex items-center">
                       <ShieldCheck className="w-3.5 h-3.5 mr-1" />
@@ -383,7 +383,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                       <span className="font-bold text-slate-900">
                         {renter.electricityBillingType === 'included_in_rent' 
                           ? 'Included in Rent' 
-                          : `Metered (â‚¹${settings.electricityRate}/unit)`}
+                          : `Metered (₹${settings.electricityRate}/unit)`}
                       </span>
                     </div>
                   </div>
@@ -402,7 +402,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                     </div>
                     <div className="flex justify-between">
                       <span className="text-slate-500">Water Utility:</span>
-                      <span className="font-semibold text-slate-900">â‚¹{settings.defaultWaterCharges}/month</span>
+                      <span className="font-semibold text-slate-900">₹{settings.defaultWaterCharges}/month</span>
                     </div>
                   </div>
                 </div>
@@ -486,7 +486,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                     Statement for {currentBill.billingPeriod}
                   </h3>
                   <p className="text-xs text-slate-500">
-                    Invoice #{currentBill.invoiceNumber} â€¢ Payment Due: <strong className="text-rose-600 font-semibold">{currentBill.dueDate || '10th of Month'}</strong>
+                    Invoice #{currentBill.invoiceNumber} • Payment Due: <strong className="text-rose-600 font-semibold">{currentBill.dueDate || '10th of Month'}</strong>
                   </p>
                 </div>
 
@@ -514,7 +514,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
               <div className="grid grid-cols-2 sm:grid-cols-4 gap-3 my-4 text-xs">
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-[10px] text-slate-500 block uppercase font-bold">Slide 2: Rent</span>
-                  <span className="font-bold text-slate-900 text-sm">â‚¹{currentBill.rent.toLocaleString('en-IN')}</span>
+                  <span className="font-bold text-slate-900 text-sm">₹{currentBill.rent.toLocaleString('en-IN')}</span>
                 </div>
 
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
@@ -522,18 +522,18 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                   <span className="font-bold text-slate-900 text-sm">
                     {currentBill.electricityBillingType === 'included_in_rent'
                       ? 'Included'
-                      : `â‚¹${currentBill.electricityAmount.toLocaleString('en-IN')}`}
+                      : `₹${currentBill.electricityAmount.toLocaleString('en-IN')}`}
                   </span>
                 </div>
 
                 <div className="bg-slate-50 p-3 rounded-xl border border-slate-200">
                   <span className="text-[10px] text-slate-500 block uppercase font-bold">Water & Maint</span>
-                  <span className="font-bold text-slate-900 text-sm">â‚¹{currentBill.waterAmount.toLocaleString('en-IN')}</span>
+                  <span className="font-bold text-slate-900 text-sm">₹{currentBill.waterAmount.toLocaleString('en-IN')}</span>
                 </div>
 
                 <div className="bg-amber-50 p-3 rounded-xl border border-amber-200">
                   <span className="text-[10px] text-amber-800 block uppercase font-bold">Total Statement</span>
-                  <span className="font-black text-amber-950 text-base">â‚¹{currentBill.totalAmount.toLocaleString('en-IN')}</span>
+                  <span className="font-black text-amber-950 text-base">₹{currentBill.totalAmount.toLocaleString('en-IN')}</span>
                 </div>
               </div>
 
@@ -541,7 +541,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                 <div className="text-xs text-slate-600">
                   {currentBill.remainingAmount > 0 ? (
                     <span>
-                      Balance Due: <strong className="text-rose-600 font-bold">â‚¹{currentBill.remainingAmount.toLocaleString('en-IN')}</strong>
+                      Balance Due: <strong className="text-rose-600 font-bold">₹{currentBill.remainingAmount.toLocaleString('en-IN')}</strong>
                     </span>
                   ) : (
                     <span className="text-emerald-700 font-semibold flex items-center">
@@ -628,15 +628,15 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                           <td className="px-4 py-3 font-semibold text-slate-900">
                             {b.billingPeriod}
                           </td>
-                          <td className="px-4 py-3">â‚¹{b.rent.toLocaleString('en-IN')}</td>
+                          <td className="px-4 py-3">₹{b.rent.toLocaleString('en-IN')}</td>
                           <td className="px-4 py-3">
-                            {b.electricityBillingType === 'included_in_rent' ? 'Included' : `â‚¹${b.electricityAmount}`}
+                            {b.electricityBillingType === 'included_in_rent' ? 'Included' : `₹${b.electricityAmount}`}
                           </td>
                           <td className="px-4 py-3 font-black text-slate-900">
-                            â‚¹{b.totalAmount.toLocaleString('en-IN')}
+                            ₹{b.totalAmount.toLocaleString('en-IN')}
                           </td>
                           <td className="px-4 py-3 font-bold text-rose-600">
-                            â‚¹{b.remainingAmount.toLocaleString('en-IN')}
+                            ₹{b.remainingAmount.toLocaleString('en-IN')}
                           </td>
                           <td className="px-4 py-3">
                             <span className={`inline-flex items-center text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider border ${
@@ -724,7 +724,7 @@ export const RenterPortal: React.FC<RenterPortalProps> = ({
                         <td className="px-4 py-3 text-slate-500">
                           {new Date(p.paidAt).toLocaleDateString('en-IN', { day: 'numeric', month: 'short', year: 'numeric' })}
                         </td>
-                        <td className="px-4 py-3 font-black text-slate-900">â‚¹{p.amount.toLocaleString('en-IN')}</td>
+                        <td className="px-4 py-3 font-black text-slate-900">₹{p.amount.toLocaleString('en-IN')}</td>
                         <td className="px-4 py-3">
                           <span className="font-semibold block">{p.method}</span>
                           {p.transactionId && <span className="text-[10px] text-slate-400 font-mono">Ref: {p.transactionId}</span>}

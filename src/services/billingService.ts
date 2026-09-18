@@ -32,8 +32,8 @@ export const DEFAULT_BUILDING_SETTINGS: BuildingSettings = {
   id: 'prem_niwas',
   buildingName: 'PREM NIWAS',
   defaultAnnualIncrease: 5,
-  electricityRate: 8, // â‚¹8 per unit default
-  defaultWaterCharges: 300, // â‚¹300 default water charge
+  electricityRate: 8, // ₹8 per unit default
+  defaultWaterCharges: 300, // ₹300 default water charge
   upiId: 'premniwas@okaxis',
   upiName: 'Prem Niwas Management',
   qrCodeUrl: null,
@@ -72,7 +72,7 @@ export async function saveBuildingSettings(
 
   await logActivity(
     'SETTINGS_UPDATED',
-    `Updated building settings (Rate: â‚¹${updates.electricityRate ?? 8}/unit, Annual Increase: ${updates.defaultAnnualIncrease ?? 5}%, Water: â‚¹${updates.defaultWaterCharges ?? 300})`,
+    `Updated building settings (Rate: ₹${updates.electricityRate ?? 8}/unit, Annual Increase: ${updates.defaultAnnualIncrease ?? 5}%, Water: ₹${updates.defaultWaterCharges ?? 300})`,
     'settings',
     'prem_niwas',
     operatorName
@@ -218,7 +218,7 @@ export async function submitMeterReading(
 
   await logActivity(
     'METER_SUBMITTED',
-    `Submitted meter reading of ${params.enteredReading} (Units: ${units}, Rate: â‚¹${params.electricityRate}/unit, Amount: â‚¹${electricityAmount}) for Room ${params.roomNumber}`,
+    `Submitted meter reading of ${params.enteredReading} (Units: ${units}, Rate: ₹${params.electricityRate}/unit, Amount: ₹${electricityAmount}) for Room ${params.roomNumber}`,
     'meter',
     readingId,
     operatorName
@@ -246,7 +246,7 @@ export async function approveMeterReading(
 
   await logActivity(
     'METER_APPROVED',
-    `Approved meter reading of ${reading.enteredReading} (${reading.units} units @ â‚¹${reading.electricityRate}/unit) for ${reading.renterName} (Room ${reading.roomNumber})`,
+    `Approved meter reading of ${reading.enteredReading} (${reading.units} units @ ₹${reading.electricityRate}/unit) for ${reading.renterName} (Room ${reading.roomNumber})`,
     'meter',
     readingId,
     approverName
@@ -312,8 +312,8 @@ export function subscribeRenterMeterReadings(
 /**
  * Calculates new rent based on previous rent and annual increase percent.
  * MANDATORY RULE: Final rent MUST be rounded to the nearest whole rupee.
- * Example: â‚¹5,000 + 5% = â‚¹5,250.
- * Next year: â‚¹5,250 + 5% = â‚¹5,512.50 -> â‚¹5,513.
+ * Example: ₹5,000 + 5% = ₹5,250.
+ * Next year: ₹5,250 + 5% = ₹5,512.50 -> ₹5,513.
  */
 export function calculateAnnualRentIncrease(
   previousRent: number, 
@@ -367,7 +367,7 @@ export async function applyAnnualRentIncrease(
   // 3. Log audit activity
   await logActivity(
     'RENT_INCREASE_APPLIED',
-    `Applied annual rent increase of ${increasePercent}% for ${renter.fullName}. Rent increased from â‚¹${previousRent.toLocaleString('en-IN')} to â‚¹${newRent.toLocaleString('en-IN')}`,
+    `Applied annual rent increase of ${increasePercent}% for ${renter.fullName}. Rent increased from ₹${previousRent.toLocaleString('en-IN')} to ₹${newRent.toLocaleString('en-IN')}`,
     'renter',
     renterId,
     operatorName
@@ -520,7 +520,7 @@ export async function generateMonthlyBill(
 
   await logActivity(
     'BILL_GENERATED',
-    `Generated bill ${invoiceNumber} for ${data.renterName} (Room ${data.roomNumber}) - Total: â‚¹${totalAmount.toLocaleString('en-IN')} (Rent: â‚¹${data.rent}, Elec: â‚¹${finalElectricityAmount}, Water: â‚¹${data.waterAmount}, Back Dues: â‚¹${data.backDues})`,
+    `Generated bill ${invoiceNumber} for ${data.renterName} (Room ${data.roomNumber}) - Total: ₹${totalAmount.toLocaleString('en-IN')} (Rent: ₹${data.rent}, Elec: ₹${finalElectricityAmount}, Water: ₹${data.waterAmount}, Back Dues: ₹${data.backDues})`,
     'bill',
     billId,
     operatorName
@@ -621,7 +621,7 @@ export async function correctBill(
 
   await logActivity(
     'BILL_CORRECTED',
-    `Corrected bill ${oldBill.invoiceNumber} for ${oldBill.renterName}. Total adjusted from â‚¹${oldBill.totalAmount} to â‚¹${newTotal}. Reason: "${updates.reason}"`,
+    `Corrected bill ${oldBill.invoiceNumber} for ${oldBill.renterName}. Total adjusted from ₹${oldBill.totalAmount} to ₹${newTotal}. Reason: "${updates.reason}"`,
     'bill',
     billId,
     operatorName
@@ -652,7 +652,7 @@ export async function recordPayment(
   const bill = billSnap.data() as Bill;
 
   const paymentAmount = Math.round(Number(params.amount));
-  if (paymentAmount <= 0) throw new Error('Payment amount must be greater than â‚¹0');
+  if (paymentAmount <= 0) throw new Error('Payment amount must be greater than ₹0');
 
   const now = new Date();
   const dateCode = `${now.getFullYear()}${String(now.getMonth() + 1).padStart(2, '0')}${String(now.getDate()).padStart(2, '0')}`;
@@ -706,7 +706,7 @@ export async function recordPayment(
 
     await logActivity(
       'CASH_PAYMENT_RECORDED',
-      `Recorded Cash Payment of â‚¹${paymentAmount.toLocaleString('en-IN')} for ${params.renterName} (Room ${params.roomNumber}) on bill ${bill.invoiceNumber}. Remaining due: â‚¹${remainingDueAfterPayment.toLocaleString('en-IN')}`,
+      `Recorded Cash Payment of ₹${paymentAmount.toLocaleString('en-IN')} for ${params.renterName} (Room ${params.roomNumber}) on bill ${bill.invoiceNumber}. Remaining due: ₹${remainingDueAfterPayment.toLocaleString('en-IN')}`,
       'payment',
       paymentId,
       operatorName
@@ -715,7 +715,7 @@ export async function recordPayment(
     // Online UPI payment submitted by resident -> logged as pending verification
     await logActivity(
       'PAYMENT_CREATED',
-      `Renter ${params.renterName} submitted UPI/QR payment of â‚¹${paymentAmount.toLocaleString('en-IN')} (Ref: ${params.transactionId || 'None'}). Verification Pending.`,
+      `Renter ${params.renterName} submitted UPI/QR payment of ₹${paymentAmount.toLocaleString('en-IN')} (Ref: ${params.transactionId || 'None'}). Verification Pending.`,
       'payment',
       paymentId,
       params.renterName
@@ -769,7 +769,7 @@ export async function verifyPayment(
   // 3. Log Activity
   await logActivity(
     'PAYMENT_VERIFIED',
-    `Verified ${payment.method} payment of â‚¹${payment.amount.toLocaleString('en-IN')} for ${payment.renterName} (Room ${payment.roomNumber}). Receipt: ${payment.receiptId}. Remaining Due: â‚¹${newRemaining.toLocaleString('en-IN')}`,
+    `Verified ${payment.method} payment of ₹${payment.amount.toLocaleString('en-IN')} for ${payment.renterName} (Room ${payment.roomNumber}). Receipt: ${payment.receiptId}. Remaining Due: ₹${newRemaining.toLocaleString('en-IN')}`,
     'payment',
     paymentId,
     operatorName
@@ -794,7 +794,7 @@ export async function rejectPayment(
 
   await logActivity(
     'PAYMENT_REJECTED',
-    `Rejected payment of â‚¹${payment.amount} for ${payment.renterName}. Reason: "${reason}"`,
+    `Rejected payment of ₹${payment.amount} for ${payment.renterName}. Reason: "${reason}"`,
     'payment',
     paymentId,
     operatorName

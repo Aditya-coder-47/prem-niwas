@@ -245,7 +245,7 @@ export const RoomsView: React.FC<RoomsViewProps> = ({
                   {/* Rent Info */}
                   <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-xs">
                     <span className="text-slate-500 font-medium">Monthly Base Rent:</span>
-                    <span className="font-extrabold text-sm text-slate-900">â‚¹{room.baseRent.toLocaleString('en-IN')}</span>
+                    <span className="font-extrabold text-sm text-slate-900">₹{room.baseRent.toLocaleString('en-IN')}</span>
                   </div>
 
                   {/* Occupant Box or Vacancy Box */}

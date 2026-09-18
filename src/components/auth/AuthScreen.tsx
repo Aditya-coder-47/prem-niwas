@@ -202,7 +202,7 @@ export const AuthScreen: React.FC = () => {
             PREM NIWAS
           </h1>
           <p className="mt-1 text-xs text-slate-400">
-            Residential Rental Management â€¢ Civil Lines Road
+            Residential Rental Management • Civil Lines Road
           </p>
         </div>
 
@@ -287,7 +287,7 @@ export const AuthScreen: React.FC = () => {
                     id="login-password-input"
                     type="password"
                     required
-                    placeholder="â€¢â€¢â€¢â€¢â€¢â€¢â€¢â€¢"
+                    placeholder="••••••••"
                     value={loginPassword}
                     onChange={(e) => setLoginPassword(e.target.value)}
                     className="w-full pl-9 pr-3 py-2.5 bg-slate-800/80 border border-slate-700 rounded-xl text-xs text-white placeholder-slate-500 focus:outline-none focus:ring-2 focus:ring-amber-400 focus:border-amber-400 transition-all"
@@ -567,7 +567,7 @@ export const AuthScreen: React.FC = () => {
 
         {/* Footer */}
         <p className="mt-6 text-center text-xs text-slate-500">
-          PREM NIWAS â€¢ Residential Building Management
+          PREM NIWAS • Residential Building Management
         </p>
 
       </div>

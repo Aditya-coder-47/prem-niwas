@@ -59,7 +59,7 @@ export const RenterDetailsModal: React.FC<RenterDetailsModalProps> = ({
                 </span>
               </div>
               <p className="text-xs text-slate-500">
-                Building: PREM NIWAS â€¢ {renter.roomNumber ? `Assigned to Room ${renter.roomNumber}` : 'No active room allotment'}
+                Building: PREM NIWAS • {renter.roomNumber ? `Assigned to Room ${renter.roomNumber}` : 'No active room allotment'}
               </p>
             </div>
           </div>
@@ -86,13 +86,13 @@ export const RenterDetailsModal: React.FC<RenterDetailsModalProps> = ({
             <div>
               <span className="text-slate-500 block">Agreed Monthly Rent</span>
               <strong className="text-slate-900 text-sm">
-                â‚¹{renter.monthlyRent.toLocaleString('en-IN')}/mo
+                ₹{renter.monthlyRent.toLocaleString('en-IN')}/mo
               </strong>
             </div>
             <div>
               <span className="text-slate-500 block">Security Deposit</span>
               <strong className="text-slate-900 text-sm">
-                â‚¹{renter.securityDeposit.toLocaleString('en-IN')}
+                ₹{renter.securityDeposit.toLocaleString('en-IN')}
               </strong>
             </div>
             <div>
@@ -198,7 +198,7 @@ export const RenterDetailsModal: React.FC<RenterDetailsModalProps> = ({
             <div className="p-4 bg-slate-100 border border-slate-300 rounded-xl text-xs space-y-1">
               <div className="font-bold text-slate-800">Checkout Record:</div>
               <div className="text-slate-600">Vacated on: <strong>{renter.checkoutDate}</strong></div>
-              <div className="text-slate-600">Refunded Security Deposit: <strong>â‚¹{renter.securityDepositReturned || 0}</strong></div>
+              <div className="text-slate-600">Refunded Security Deposit: <strong>₹{renter.securityDepositReturned || 0}</strong></div>
               {renter.checkoutNotes && (
                 <div className="text-slate-600">Notes: <em>{renter.checkoutNotes}</em></div>
               )}

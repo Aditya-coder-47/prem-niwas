@@ -116,7 +116,7 @@ export const ActivityLogView: React.FC<ActivityLogViewProps> = ({ activityLogs }
                 </div>
                 <div className="flex items-center space-x-2 text-[11px] text-slate-500">
                   <span>Operator: <strong className="text-slate-700">{log.performedByName}</strong></span>
-                  <span>â€¢</span>
+                  <span>•</span>
                   <span className="font-mono text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">
                     {log.action}
                   </span>

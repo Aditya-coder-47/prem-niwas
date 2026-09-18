@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { 
   Receipt, 
   Plus, 
@@ -178,7 +178,7 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
   });
 
   return (
-    <div id="owner-bills-view" className="space-y-6 pb-20 md:pb-10">
+    <div id="owner-bills-view" className="space-y-6 pb-8 bg-slate-950 border border-slate-800/90 rounded-2xl sm:rounded-3xl p-4 sm:p-6 text-white shadow-xl">
       
       {/* Top Header & Action Controls */}
       <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">
@@ -217,7 +217,7 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
         <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Total Invoiced</span>
           <div className="text-xl md:text-2xl font-black text-white mt-1">
-            â‚¹{totalBilled.toLocaleString('en-IN')}
+            ₹{totalBilled.toLocaleString('en-IN')}
           </div>
           <span className="text-[10px] text-slate-500">{activeBills.length} Active Bills</span>
         </div>
@@ -225,7 +225,7 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
         <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Collected</span>
           <div className="text-xl md:text-2xl font-black text-emerald-400 mt-1">
-            â‚¹{totalCollected.toLocaleString('en-IN')}
+            ₹{totalCollected.toLocaleString('en-IN')}
           </div>
           <span className="text-[10px] text-emerald-500">Verified in Bank/Cash</span>
         </div>
@@ -233,7 +233,7 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
         <div className="bg-slate-900/80 border border-slate-800 p-4 rounded-2xl">
           <span className="text-[10px] font-bold text-slate-400 uppercase tracking-wider block">Pending Balance</span>
           <div className="text-xl md:text-2xl font-black text-amber-400 mt-1">
-            â‚¹{totalPendingDues.toLocaleString('en-IN')}
+            ₹{totalPendingDues.toLocaleString('en-IN')}
           </div>
           <span className="text-[10px] text-amber-500">Current & Back Dues</span>
         </div>
@@ -389,24 +389,24 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
                             {b.billingPeriod}
                           </td>
                           <td className="px-4 py-3 text-[11px] text-slate-400 space-y-0.5">
-                            <div>Rent: â‚¹{b.rent.toLocaleString('en-IN')}</div>
+                            <div>Rent: ₹{b.rent.toLocaleString('en-IN')}</div>
                             <div>
-                              Elec: {b.electricityBillingType === 'included_in_rent' ? 'Included' : `â‚¹${b.electricityAmount} (${b.electricityUnits || 0}u)`}
+                              Elec: {b.electricityBillingType === 'included_in_rent' ? 'Included' : `₹${b.electricityAmount} (${b.electricityUnits || 0}u)`}
                             </div>
-                            <div>Water: â‚¹{b.waterAmount}</div>
-                            {b.backDues > 0 && <div className="text-rose-400 font-semibold">Dues: â‚¹{b.backDues}</div>}
+                            <div>Water: ₹{b.waterAmount}</div>
+                            {b.backDues > 0 && <div className="text-rose-400 font-semibold">Dues: ₹{b.backDues}</div>}
                           </td>
                           <td className="px-4 py-3">
                             <span className="font-black text-sm text-white">
-                              â‚¹{b.totalAmount.toLocaleString('en-IN')}
+                              ₹{b.totalAmount.toLocaleString('en-IN')}
                             </span>
                           </td>
                           <td className="px-4 py-3 text-xs">
                             <span className="text-emerald-400 font-bold block">
-                              â‚¹{b.paidAmount.toLocaleString('en-IN')}
+                              ₹{b.paidAmount.toLocaleString('en-IN')}
                             </span>
                             <span className="text-amber-400 font-semibold block text-[11px]">
-                              Due: â‚¹{b.remainingAmount.toLocaleString('en-IN')}
+                              Due: ₹{b.remainingAmount.toLocaleString('en-IN')}
                             </span>
                           </td>
                           <td className="px-4 py-3">
@@ -577,7 +577,7 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
                         </div>
 
                         <span className="text-right font-black text-white text-sm">
-                          â‚¹{reading.electricityAmount.toLocaleString('en-IN')}
+                          ₹{reading.electricityAmount.toLocaleString('en-IN')}
                         </span>
                       </div>
                     )}
@@ -664,7 +664,7 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
                             <span className="text-[10px] text-slate-400">Room {p.roomNumber}</span>
                           </td>
                           <td className="px-4 py-3 font-black text-sm text-emerald-400">
-                            â‚¹{p.amount.toLocaleString('en-IN')}
+                            ₹{p.amount.toLocaleString('en-IN')}
                           </td>
                           <td className="px-4 py-3 text-xs">
                             <span className="text-white font-semibold block">{p.method}</span>
@@ -768,13 +768,13 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
                           {r.leaseStartDate || 'N/A'}
                         </td>
                         <td className="px-4 py-3 font-black text-white">
-                          â‚¹{currentRent.toLocaleString('en-IN')}
+                          ₹{currentRent.toLocaleString('en-IN')}
                         </td>
                         <td className="px-4 py-3 text-amber-400 font-bold">
                           {percent}%
                         </td>
                         <td className="px-4 py-3 font-bold text-emerald-400">
-                          â‚¹{newRent.toLocaleString('en-IN')} (+â‚¹{calculatedIncrease})
+                          ₹{newRent.toLocaleString('en-IN')} (+₹{calculatedIncrease})
                         </td>
                         <td className="px-4 py-3 text-slate-500">
                           {r.lastAnnualIncreaseDate || 'Never'}
@@ -827,10 +827,10 @@ export const BillsView: React.FC<BillsViewProps> = ({ renters, rooms }) => {
                       <tr key={h.id}>
                         <td className="px-4 py-3 font-bold text-white">{h.renterName}</td>
                         <td className="px-4 py-3 text-slate-400">{h.effectiveDate}</td>
-                        <td className="px-4 py-3 font-mono">â‚¹{h.previousRent.toLocaleString('en-IN')}</td>
+                        <td className="px-4 py-3 font-mono">₹{h.previousRent.toLocaleString('en-IN')}</td>
                         <td className="px-4 py-3 text-amber-400 font-bold">{h.increasePercent}%</td>
-                        <td className="px-4 py-3 text-emerald-400">+â‚¹{h.increaseAmount.toLocaleString('en-IN')}</td>
-                        <td className="px-4 py-3 font-black text-white font-mono">â‚¹{h.newRent.toLocaleString('en-IN')}</td>
+                        <td className="px-4 py-3 text-emerald-400">+₹{h.increaseAmount.toLocaleString('en-IN')}</td>
+                        <td className="px-4 py-3 font-black text-white font-mono">₹{h.newRent.toLocaleString('en-IN')}</td>
                       </tr>
                     ))}
                   </tbody>

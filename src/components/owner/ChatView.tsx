@@ -121,7 +121,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
   const quickPresets = [
     'ðŸ‘‹ Reminder: Monthly rent & electricity bill has been generated.',
     'ðŸ’§ Notice: Overhead water tank sanitization scheduled.',
-    'âœ… Payment received and verified. Thank you!',
+    '✅ Payment received and verified. Thank you!',
     'ðŸ”§ Maintenance team has been notified and is inspecting.'
   ];
 
@@ -227,7 +227,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                         )}
                       </div>
                       <p className="text-[11px] text-slate-400 truncate mt-0.5">
-                        {renter.roomNumber ? `Room ${renter.roomNumber}` : 'Applicant'} â€¢ {renter.phone}
+                        {renter.roomNumber ? `Room ${renter.roomNumber}` : 'Applicant'} • {renter.phone}
                       </p>
                     </div>
                   </button>

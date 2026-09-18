@@ -1,4 +1,4 @@
-﻿import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { AuthScreen } from './components/auth/AuthScreen';
@@ -137,7 +137,7 @@ function MainApp() {
     : null;
 
   return (
-    <div className="min-h-screen bg-slate-100 flex flex-col font-sans text-slate-900 antialiased">
+    <div className="min-h-screen bg-slate-100/70 flex flex-col font-sans text-slate-900 antialiased selection:bg-amber-400 selection:text-slate-950">
       {/* Persistent Navigation Header */}
       <Navbar
         currentTab={currentTab}
@@ -147,7 +147,7 @@ function MainApp() {
       />
 
       {/* Main Content Area */}
-      <main className="flex-1 max-w-7xl w-full mx-auto px-4 sm:px-6 lg:px-8 pt-6">
+      <main className="flex-1 max-w-7xl w-full mx-auto px-3 sm:px-6 lg:px-8 pt-3 sm:pt-6 pb-24 md:pb-12">
         
         {/* OWNER VIEWS (Only available when logged in with permanent owner email) */}
         {role === 'owner' && (
@@ -373,13 +373,13 @@ function MainApp() {
       />
 
       {/* Footer Note */}
-      <footer className="mt-12 py-6 border-t border-slate-200 text-center text-xs text-slate-500 bg-white">
+      <footer className="mt-8 mb-16 md:mb-0 py-5 border-t border-slate-200/80 text-center text-xs text-slate-500 bg-white">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>
-            <strong>PREM NIWAS</strong> â€¢ Phase 1 Residential Rental Management (15 Rooms)
+            <strong className="text-slate-700">PREM NIWAS</strong> • Phase 1 Residential Rental Management (15 Rooms)
           </span>
           <span className="text-slate-400">
-            Civil Lines Road â€¢ 15 Residential Units
+            Civil Lines Road • 15 Residential Units • Real-time Portal
           </span>
         </div>
       </footer>

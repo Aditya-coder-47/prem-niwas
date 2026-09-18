@@ -186,7 +186,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
             <div className="pt-2 border-t border-slate-200 text-slate-600">
               <span className="font-semibold text-slate-700 block text-[10px] uppercase">Emergency Contact:</span>
               <p className="mt-0.5">
-                {applicant.emergencyContactName} ({applicant.emergencyContactRelation}) â€¢ {applicant.emergencyContactPhone}
+                {applicant.emergencyContactName} ({applicant.emergencyContactRelation}) • {applicant.emergencyContactPhone}
               </p>
             </div>
           </div>
@@ -214,7 +214,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
                     >
                       {vacantRooms.map(r => (
                         <option key={r.id} value={r.id}>
-                          {r.roomName} â€” {r.floor} ({r.type}, Base: â‚¹{r.baseRent}/mo)
+                          {r.roomName} — {r.floor} ({r.type}, Base: ₹{r.baseRent}/mo)
                         </option>
                       ))}
                     </select>
@@ -236,7 +236,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Monthly Rent (â‚¹) *
+                    Monthly Rent (₹) *
                   </label>
                   <input
                     type="number"
@@ -251,7 +251,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Security Deposit Received (â‚¹) *
+                    Security Deposit Received (₹) *
                   </label>
                   <input
                     type="number"

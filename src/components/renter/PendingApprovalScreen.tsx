@@ -41,7 +41,7 @@ export const PendingApprovalScreen: React.FC<PendingApprovalScreenProps> = ({
             PREM NIWAS
           </h1>
           <p className="text-xs text-slate-400 mt-0.5">
-            Residential Rental Management â€¢ Civil Lines Road
+            Residential Rental Management • Civil Lines Road
           </p>
         </div>
 
@@ -133,7 +133,7 @@ export const PendingApprovalScreen: React.FC<PendingApprovalScreenProps> = ({
         </div>
 
         <p className="mt-4 text-center text-xs text-slate-500">
-          Prem Niwas Management â€¢ Contact Owner: <strong>{PERMANENT_OWNER_EMAIL}</strong>
+          Prem Niwas Management • Contact Owner: <strong>{PERMANENT_OWNER_EMAIL}</strong>
         </p>
 
       </div>

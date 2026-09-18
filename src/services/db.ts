@@ -243,7 +243,7 @@ export async function addNewRoom(
   await setDoc(doc(db, 'rooms', roomId), newRoom);
   await logActivity(
     'ROOM_ADDED',
-    `Added new room: ${newRoom.roomName} (${newRoom.floor}) with base rent â‚¹${newRoom.baseRent.toLocaleString('en-IN')}`,
+    `Added new room: ${newRoom.roomName} (${newRoom.floor}) with base rent ₹${newRoom.baseRent.toLocaleString('en-IN')}`,
     'room',
     roomId,
     operatorName
@@ -632,7 +632,7 @@ export async function submitRenterSignup(
 
   await logActivity(
     'SIGNUP_SUBMITTED',
-    `New resident registration submitted by "${renterInput.fullName}" (${renterInput.email}) â€” Awaiting Owner Approval`,
+    `New resident registration submitted by "${renterInput.fullName}" (${renterInput.email}) — Awaiting Owner Approval`,
     'renter',
     renterId,
     renterInput.fullName
@@ -762,7 +762,7 @@ export async function createBill(
 
   await logActivity(
     'BILL_GENERATED',
-    `Generated bill ${newBill.invoiceNumber} for ${newBill.renterName} (Room ${newBill.roomNumber}) - Total: â‚¹${newBill.totalAmount.toLocaleString('en-IN')}`,
+    `Generated bill ${newBill.invoiceNumber} for ${newBill.renterName} (Room ${newBill.roomNumber}) - Total: ₹${newBill.totalAmount.toLocaleString('en-IN')}`,
     'bill',
     billId,
     operatorName
