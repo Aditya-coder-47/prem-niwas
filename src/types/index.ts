@@ -1,10 +1,10 @@
 export type UserRole = 'owner' | 'renter';
 
-export const PERMANENT_OWNER_EMAIL = 'adityakumar87258@gmail.com';
+export const PERMANENT_OWNER_EMAIL = 'premniwas33@gmail.com';
 
 export const OWNER_EMAILS = [
-  'adityakumar87258@gmail.com',
   'premniwas33@gmail.com',
+  'adityakumar87258@gmail.com',
   'amitniwas33@gmail.com',
   'amitniwas@gmail.com'
 ];
