@@ -1,4 +1,4 @@
-﻿import React from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { 
   Building2, 
   DoorClosed, 
@@ -12,7 +12,9 @@ import {
   CheckCircle2, 
   Clock, 
   ShieldCheck,
-  AlertCircle
+  AlertCircle,
+  UserPlus,
+  X
 } from 'lucide-react';
 import { Room, Renter, ActivityLog, Notice } from '../../types';
 
@@ -54,9 +56,68 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
 
   const pendingApplicants = renters.filter(r => r.status === 'pending_approval');
 
+  // Live toast notification when new applicant appears
+  const [toastApplicant, setToastApplicant] = useState<Renter | null>(null);
+  const prevPendingRef = useRef<string[]>([]);
+
+  useEffect(() => {
+    const currentIds = pendingApplicants.map(r => r.id);
+    const prevIds = prevPendingRef.current;
+    // Fire toast only when count increases (skip initial mount)
+    const newOnes = pendingApplicants.filter(r => !prevIds.includes(r.id));
+    if (newOnes.length > 0 && prevIds.length >= 0 && prevPendingRef.current !== undefined) {
+      if (prevIds.length >= 0 && newOnes.length > 0 && prevPendingRef.current.length !== currentIds.length) {
+        setToastApplicant(newOnes[0]);
+        const timer = setTimeout(() => setToastApplicant(null), 8000);
+        prevPendingRef.current = currentIds;
+        return () => clearTimeout(timer);
+      }
+    }
+    prevPendingRef.current = currentIds;
+  }, [pendingApplicants.length]);
+
   return (
     <div className="space-y-6 pb-20 md:pb-12">
+
+      {/* ===== NEW APPLICANT LIVE TOAST ===== */}
+      {toastApplicant && (
+        <div className="fixed top-20 right-4 z-50 w-80 bg-white border border-amber-400 rounded-2xl shadow-2xl p-4 animate-slide-in-right flex flex-col gap-2"
+          style={{ animation: 'slideInRight 0.4s ease-out' }}>
+          <style>{`
+            @keyframes slideInRight {
+              from { transform: translateX(120%); opacity: 0; }
+              to   { transform: translateX(0);   opacity: 1; }
+            }
+          `}</style>
+          <div className="flex items-start justify-between">
+            <div className="flex items-center space-x-2">
+              <div className="w-9 h-9 rounded-xl bg-amber-500 flex items-center justify-center flex-shrink-0">
+                <UserPlus className="w-5 h-5 text-slate-950" />
+              </div>
+              <div>
+                <p className="text-xs font-extrabold text-amber-700 uppercase tracking-wide">New Application!</p>
+                <p className="font-bold text-slate-900 text-sm leading-snug">{toastApplicant.fullName}</p>
+                <p className="text-xs text-slate-500">{toastApplicant.email}</p>
+              </div>
+            </div>
+            <button onClick={() => setToastApplicant(null)} className="text-slate-400 hover:text-slate-700 ml-2 mt-0.5 flex-shrink-0">
+              <X className="w-4 h-4" />
+            </button>
+          </div>
+          <p className="text-xs text-slate-600 bg-amber-50 border border-amber-200 rounded-lg px-3 py-1.5">
+            Pending your approval — verify KYC &amp; allot a room to grant portal access.
+          </p>
+          <button
+            onClick={() => { setToastApplicant(null); onNavigateTab('renters', 'pending_approval'); }}
+            className="w-full py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl transition-colors"
+          >
+            Review Now →
+          </button>
+        </div>
+      )}
+
       {/* Welcome Banner */}
+
       <div className="bg-gradient-to-r from-slate-900 via-slate-800 to-slate-900 border border-slate-700/60 rounded-xl p-6 text-white shadow-sm flex flex-col md:flex-row md:items-center justify-between gap-4">
         <div>
           <div className="flex items-center space-x-2 text-amber-400 text-xs font-bold uppercase tracking-wider mb-1">
