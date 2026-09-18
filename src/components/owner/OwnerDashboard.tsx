@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { 
   Building2, 
   DoorClosed, 
@@ -64,7 +64,7 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
             <span>Building Control Dashboard</span>
           </div>
           <h1 className="text-2xl font-bold tracking-tight text-white">
-            AMIT NIWAS
+            PREM NIWAS
           </h1>
           <p className="text-sm text-slate-300 mt-1 max-w-xl">
             Overview of occupancy, tenant allocations, and operational notices for {totalRooms} residential units.
@@ -113,7 +113,7 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
             onClick={() => onNavigateTab('renters', 'pending_approval')}
             className="px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 text-xs font-bold rounded-lg shadow-sm whitespace-nowrap transition-colors"
           >
-            Review & Allot Units →
+            Review & Allot Units â†’
           </button>
         </div>
       )}
@@ -189,16 +189,16 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
           <div className="flex items-center justify-between">
             <span className="text-xs font-semibold text-slate-500 uppercase tracking-wider">Monthly Rent Roll</span>
             <div className="w-8 h-8 rounded-lg bg-indigo-50 text-indigo-600 flex items-center justify-center font-bold text-sm">
-              ₹
+              â‚¹
             </div>
           </div>
           <div className="mt-3 flex items-baseline space-x-1">
             <span className="text-2xl sm:text-3xl font-bold text-slate-900">
-              ₹{currentMonthlyRent.toLocaleString('en-IN')}
+              â‚¹{currentMonthlyRent.toLocaleString('en-IN')}
             </span>
           </div>
           <div className="mt-2 text-xs text-slate-500">
-            Potential full rent: ₹{potentialMonthlyRent.toLocaleString('en-IN')}
+            Potential full rent: â‚¹{potentialMonthlyRent.toLocaleString('en-IN')}
           </div>
         </div>
       </div>
@@ -229,7 +229,7 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
           {/* 2nd Floor: Rooms 11-15 */}
           <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
             <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>2nd Floor • Rooms 11 to 15</span>
+              <span>2nd Floor â€¢ Rooms 11 to 15</span>
               <span className="text-[11px] text-slate-500 font-normal">Top Floor</span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
@@ -240,7 +240,7 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
           {/* 1st Floor: Rooms 6-10 */}
           <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
             <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>1st Floor • Rooms 6 to 10</span>
+              <span>1st Floor â€¢ Rooms 6 to 10</span>
               <span className="text-[11px] text-slate-500 font-normal">Middle Floor</span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
@@ -251,7 +251,7 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
           {/* Ground Floor: Rooms 1-5 */}
           <div className="bg-slate-50 border border-slate-200 rounded-lg p-3">
             <div className="text-xs font-bold text-slate-700 uppercase tracking-wider mb-2 flex items-center justify-between">
-              <span>Ground Floor • Rooms 1 to 5</span>
+              <span>Ground Floor â€¢ Rooms 1 to 5</span>
               <span className="text-[11px] text-slate-500 font-normal">Ground Level</span>
             </div>
             <div className="grid grid-cols-2 sm:grid-cols-5 gap-2.5">
@@ -395,7 +395,7 @@ function renderRoomBadge(room: Room, onSelect: (room: Room) => void) {
       </div>
 
       <div className="text-[10px] text-slate-400 mt-1 flex items-center justify-between">
-        <span>₹{room.baseRent}</span>
+        <span>â‚¹{room.baseRent}</span>
         <span className="text-slate-500 capitalize">{room.type.split(' ')[0]}</span>
       </div>
     </button>

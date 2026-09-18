@@ -21,8 +21,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
   const [electricityRate, setElectricityRate] = useState<number>(8);
   const [defaultWaterCharges, setDefaultWaterCharges] = useState<number>(300);
   const [defaultAnnualIncrease, setDefaultAnnualIncrease] = useState<number>(5);
-  const [upiId, setUpiId] = useState<string>('amitniwas@okaxis');
-  const [upiName, setUpiName] = useState<string>('Amit Niwas Management');
+  const [upiId, setUpiId] = useState<string>('premniwas@okaxis');
+  const [upiName, setUpiName] = useState<string>('Prem Niwas Management');
   const [qrCodeUrl, setQrCodeUrl] = useState<string | null>(null);
   const [isUploadingQr, setIsUploadingQr] = useState<boolean>(false);
   const [isSubmitting, setIsSubmitting] = useState<boolean>(false);
@@ -33,8 +33,8 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
       setElectricityRate(settings.electricityRate ?? 8);
       setDefaultWaterCharges(settings.defaultWaterCharges ?? 300);
       setDefaultAnnualIncrease(settings.defaultAnnualIncrease ?? 5);
-      setUpiId(settings.upiId || 'amitniwas@okaxis');
-      setUpiName(settings.upiName || 'Amit Niwas Management');
+      setUpiId(settings.upiId || 'premniwas@okaxis');
+      setUpiName(settings.upiName || 'Prem Niwas Management');
       setQrCodeUrl(settings.qrCodeUrl || null);
     }
   }, [settings]);
@@ -95,7 +95,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
         <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
           <div className="flex items-center space-x-2">
             <Settings className="w-5 h-5 text-amber-400" />
-            <h2 className="text-base font-bold">Amit Niwas Building Settings</h2>
+            <h2 className="text-base font-bold">Prem Niwas Building Settings</h2>
           </div>
           <button
             onClick={onClose}
@@ -121,10 +121,10 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
             <div className="grid grid-cols-2 gap-3">
               <div>
                 <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  Electricity Rate (₹/unit)
+                  Electricity Rate (â‚¹/unit)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">₹</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">â‚¹</span>
                   <input
                     type="number"
                     min="1"
@@ -135,15 +135,15 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     className="w-full pl-7 pr-3 py-2 bg-white border border-slate-300 rounded-xl font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-amber-500"
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 mt-0.5">Amit Niwas default is ₹8/unit</p>
+                <p className="text-[10px] text-slate-500 mt-0.5">PREM NIWAS default is â‚¹8/unit</p>
               </div>
 
               <div>
                 <label className="block font-bold text-slate-700 uppercase tracking-wider mb-1">
-                  Default Water Charge (₹)
+                  Default Water Charge (â‚¹)
                 </label>
                 <div className="relative">
-                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">₹</span>
+                  <span className="absolute left-3 top-1/2 -translate-y-1/2 font-bold text-slate-400">â‚¹</span>
                   <input
                     type="number"
                     min="0"
@@ -154,7 +154,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                     className="w-full pl-7 pr-3 py-2 bg-white border border-slate-300 rounded-xl font-bold text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
                   />
                 </div>
-                <p className="text-[10px] text-slate-500 mt-0.5">Amit Niwas default is ₹300</p>
+                <p className="text-[10px] text-slate-500 mt-0.5">PREM NIWAS default is â‚¹300</p>
               </div>
 
               <div className="col-span-2">
@@ -195,7 +195,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 required
                 value={upiId}
                 onChange={(e) => setUpiId(e.target.value)}
-                placeholder="e.g. amitniwas@okaxis"
+                placeholder="e.g. premniwas@okaxis"
                 className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs font-mono text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>
@@ -209,7 +209,7 @@ export const SettingsModal: React.FC<SettingsModalProps> = ({
                 required
                 value={upiName}
                 onChange={(e) => setUpiName(e.target.value)}
-                placeholder="e.g. Amit Niwas Management"
+                placeholder="e.g. Prem Niwas Management"
                 className="w-full px-3 py-2 bg-white border border-slate-300 rounded-xl text-xs text-slate-900 focus:outline-none focus:ring-2 focus:ring-blue-500"
               />
             </div>

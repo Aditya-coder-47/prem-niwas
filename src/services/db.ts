@@ -1,4 +1,4 @@
-import { 
+﻿import { 
   collection, 
   doc, 
   getDoc, 
@@ -16,7 +16,7 @@ import { sendPasswordResetEmail } from 'firebase/auth';
 import { db, auth } from '../firebase';
 import { Building, Room, Renter, Notice, ActivityLog, UserProfile, ChatMessage, Bill } from '../types';
 
-export const BUILDING_ID = 'building_amit_niwas';
+export const BUILDING_ID = 'building_prem_niwas';
 
 /**
  * Strips all `undefined` values from an object recursively before passing to Firestore
@@ -43,10 +43,10 @@ export function sanitizeForFirestore<T extends Record<string, any>>(obj: T): T {
   return cleaned;
 }
 
-export const AMIT_NIWAS_BUILDING: Building = {
+export const PREM_NIWAS_BUILDING: Building = {
   id: BUILDING_ID,
-  name: 'Amit Niwas',
-  address: 'Plot 42, Civil Lines Road, Amit Niwas Residential, Sector 4',
+  name: 'PREM NIWAS',
+  address: 'Plot 42, Civil Lines Road, Prem Niwas Residential, Sector 4',
   totalRooms: 15,
   floors: 3,
   description: 'G+2 Residential Building with 15 residential units.'
@@ -102,7 +102,7 @@ export async function checkAndSeedRooms(): Promise<boolean> {
     const buildingSnap = await getDoc(buildingRef);
 
     if (!buildingSnap.exists()) {
-      await setDoc(buildingRef, AMIT_NIWAS_BUILDING);
+      await setDoc(buildingRef, PREM_NIWAS_BUILDING);
     }
 
     // 1. Purge any leftover dummy sample renters for a true production system
@@ -169,7 +169,7 @@ export async function checkAndSeedRooms(): Promise<boolean> {
       const notice1: Notice = {
         id: 'notice_welcome',
         buildingId: BUILDING_ID,
-        title: 'Welcome to Amit Niwas Residential Portal',
+        title: 'Welcome to Prem Niwas Residential Portal',
         content: 'Building management portal is active. Residents can view room details, generate and pay monthly rent bills, and communicate directly with management.',
         category: 'General',
         priority: 'high',
@@ -243,7 +243,7 @@ export async function addNewRoom(
   await setDoc(doc(db, 'rooms', roomId), newRoom);
   await logActivity(
     'ROOM_ADDED',
-    `Added new room: ${newRoom.roomName} (${newRoom.floor}) with base rent ₹${newRoom.baseRent.toLocaleString('en-IN')}`,
+    `Added new room: ${newRoom.roomName} (${newRoom.floor}) with base rent â‚¹${newRoom.baseRent.toLocaleString('en-IN')}`,
     'room',
     roomId,
     operatorName
@@ -613,7 +613,7 @@ export async function submitRenterSignup(
 
   await logActivity(
     'SIGNUP_SUBMITTED',
-    `New resident registration submitted by "${renterInput.fullName}" (${renterInput.email}) — Awaiting Owner Approval`,
+    `New resident registration submitted by "${renterInput.fullName}" (${renterInput.email}) â€” Awaiting Owner Approval`,
     'renter',
     renterId,
     renterInput.fullName
@@ -743,7 +743,7 @@ export async function createBill(
 
   await logActivity(
     'BILL_GENERATED',
-    `Generated bill ${newBill.invoiceNumber} for ${newBill.renterName} (Room ${newBill.roomNumber}) - Total: ₹${newBill.totalAmount.toLocaleString('en-IN')}`,
+    `Generated bill ${newBill.invoiceNumber} for ${newBill.renterName} (Room ${newBill.roomNumber}) - Total: â‚¹${newBill.totalAmount.toLocaleString('en-IN')}`,
     'bill',
     billId,
     operatorName

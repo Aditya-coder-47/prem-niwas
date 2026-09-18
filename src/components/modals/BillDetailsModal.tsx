@@ -1,4 +1,4 @@
-import React, { useState, useRef } from 'react';
+﻿import React, { useState, useRef } from 'react';
 import { 
   X, 
   Printer, 
@@ -131,14 +131,14 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   AN
                 </div>
                 <div>
-                  <h1 className="text-xl font-black tracking-tight text-slate-950">AMIT NIWAS</h1>
+                  <h1 className="text-xl font-black tracking-tight text-slate-950">PREM NIWAS</h1>
                   <p className="text-[11px] font-semibold text-slate-600 uppercase tracking-wider">
                     Monthly Rental & Utility Statement
                   </p>
                 </div>
               </div>
               <p className="text-[11px] text-slate-500 mt-1.5">
-                Plot 42, Civil Lines Road, Sector 4, Amit Niwas
+                Plot 42, Civil Lines Road, Sector 4, PREM NIWAS
               </p>
             </div>
 
@@ -158,7 +158,7 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                 Period: {bill.billingPeriod}
               </p>
               <p className="text-[10px] text-slate-500">
-                Payment Due: 1st–10th
+                Payment Due: 1stâ€“10th
               </p>
             </div>
           </div>
@@ -183,12 +183,12 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
             </div>
           </div>
 
-          {/* ================= SLIDE 1 — ELECTRICITY ================= */}
+          {/* ================= SLIDE 1 â€” ELECTRICITY ================= */}
           <div className={`${activeSlide === 'electricity' ? 'block' : 'hidden md:block'} space-y-3`}>
             <div className="flex items-center justify-between pb-1 border-b border-slate-200">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center space-x-1.5">
                 <Zap className="w-4 h-4 text-amber-500" />
-                <span>Slide 1 — Electricity Calculation</span>
+                <span>Slide 1 â€” Electricity Calculation</span>
               </h3>
               <span className="text-[11px] font-semibold text-slate-500">
                 Billing Type: {isMeterBased ? 'Meter Based' : 'Included in Rent'}
@@ -222,17 +222,17 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   <div className="bg-white p-3 rounded-xl border border-amber-100 shadow-2xs">
                     <span className="text-[10px] text-slate-500 block uppercase font-bold">Rate</span>
                     <span className="text-base font-extrabold text-slate-900 mt-0.5 block">
-                      ₹{bill.electricityRate || 8}/unit
+                      â‚¹{bill.electricityRate || 8}/unit
                     </span>
                   </div>
                 </div>
 
                 <div className="flex items-center justify-between pt-2 border-t border-amber-200 text-xs font-bold">
                   <span className="text-slate-700">
-                    Electricity Subtotal ({bill.electricityUnits || 0} units × ₹{bill.electricityRate || 8}):
+                    Electricity Subtotal ({bill.electricityUnits || 0} units Ã— â‚¹{bill.electricityRate || 8}):
                   </span>
                   <span className="text-base font-black text-amber-900">
-                    ₹{bill.electricityAmount.toLocaleString('en-IN')}
+                    â‚¹{bill.electricityAmount.toLocaleString('en-IN')}
                   </span>
                 </div>
               </div>
@@ -243,18 +243,18 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   As per your residential agreement, electricity consumption is already included in your monthly room rent. No separate electricity charge is assessed.
                 </p>
                 <span className="inline-block mt-2 font-mono font-bold text-slate-700 bg-white px-3 py-1 rounded-lg border border-blue-200">
-                  Separate Electricity Charge: ₹0
+                  Separate Electricity Charge: â‚¹0
                 </span>
               </div>
             )}
           </div>
 
-          {/* ================= SLIDE 2 — RENT & OTHER ================= */}
+          {/* ================= SLIDE 2 â€” RENT & OTHER ================= */}
           <div className={`${activeSlide === 'rent' ? 'block' : 'hidden md:block'} space-y-3`}>
             <div className="flex items-center justify-between pb-1 border-b border-slate-200">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center space-x-1.5">
                 <Home className="w-4 h-4 text-blue-500" />
-                <span>Slide 2 — Rent & Other Charges</span>
+                <span>Slide 2 â€” Rent & Other Charges</span>
               </h3>
             </div>
 
@@ -267,7 +267,7 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   </span>
                 </div>
                 <span className="font-extrabold text-sm text-slate-900">
-                  ₹{bill.rent.toLocaleString('en-IN')}
+                  â‚¹{bill.rent.toLocaleString('en-IN')}
                 </span>
               </div>
 
@@ -277,7 +277,7 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   <span className="text-[10px] text-slate-500">Fixed utility share</span>
                 </div>
                 <span className="font-extrabold text-sm text-slate-900">
-                  ₹{bill.waterAmount.toLocaleString('en-IN')}
+                  â‚¹{bill.waterAmount.toLocaleString('en-IN')}
                 </span>
               </div>
 
@@ -289,20 +289,20 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   </span>
                 </div>
                 <span className={`font-extrabold text-sm ${bill.backDues > 0 ? 'text-rose-700' : 'text-slate-900'}`}>
-                  ₹{bill.backDues.toLocaleString('en-IN')}
+                  â‚¹{bill.backDues.toLocaleString('en-IN')}
                 </span>
               </div>
 
               <div className="flex items-center justify-between pt-2.5 text-xs font-bold">
                 <span className="text-slate-700">Subtotal (Rent + Water):</span>
                 <span className="text-sm font-black text-slate-900">
-                  ₹{(bill.rent + bill.waterAmount).toLocaleString('en-IN')}
+                  â‚¹{(bill.rent + bill.waterAmount).toLocaleString('en-IN')}
                 </span>
               </div>
             </div>
           </div>
 
-          {/* ================= FINAL — TOTAL AMOUNT ================= */}
+          {/* ================= FINAL â€” TOTAL AMOUNT ================= */}
           <div className={`${activeSlide === 'total' ? 'block' : 'hidden md:block'} space-y-3`}>
             <div className="flex items-center justify-between pb-1 border-b border-slate-200">
               <h3 className="text-xs font-bold uppercase tracking-wider text-slate-800 flex items-center space-x-1.5">
@@ -319,7 +319,7 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                     Total Amount Due
                   </span>
                   <div className="text-3xl sm:text-4xl font-black text-white mt-1">
-                    ₹{bill.totalAmount.toLocaleString('en-IN')}
+                    â‚¹{bill.totalAmount.toLocaleString('en-IN')}
                   </div>
                   <p className="text-[11px] text-slate-400 mt-1">
                     Payment Window: 1st to 10th of {bill.billingPeriod}
@@ -330,14 +330,14 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
                   <div>
                     <span className="text-[10px] text-slate-400 block uppercase font-semibold">Amount Paid</span>
                     <span className="text-base font-bold text-emerald-400">
-                      ₹{bill.paidAmount.toLocaleString('en-IN')}
+                      â‚¹{bill.paidAmount.toLocaleString('en-IN')}
                     </span>
                   </div>
 
                   <div>
                     <span className="text-[10px] text-slate-400 block uppercase font-semibold">Remaining Due</span>
                     <span className="text-base font-bold text-amber-300">
-                      ₹{bill.remainingAmount.toLocaleString('en-IN')}
+                      â‚¹{bill.remainingAmount.toLocaleString('en-IN')}
                     </span>
                   </div>
                 </div>
@@ -357,10 +357,10 @@ export const BillDetailsModal: React.FC<BillDetailsModalProps> = ({
           <div className="pt-4 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500">
             <div className="flex items-center space-x-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>AMIT NIWAS • Official Bill Record</span>
+              <span>PREM NIWAS â€¢ Official Bill Record</span>
             </div>
             <div className="text-right">
-              <span className="font-semibold text-slate-800 block">Amit Niwas Management</span>
+              <span className="font-semibold text-slate-800 block">Prem Niwas Management</span>
               <span className="text-[10px] text-slate-400">Plot 42, Civil Lines, Sector 4</span>
             </div>
           </div>

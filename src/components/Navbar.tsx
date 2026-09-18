@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { 
   Building2, 
   LayoutDashboard, 
@@ -50,14 +50,14 @@ export const Navbar: React.FC<NavbarProps> = ({
               <div>
                 <div className="flex items-center space-x-2">
                   <span className="font-black text-xl tracking-wider text-amber-400 font-sans">
-                    AMIT NIWAS
+                    PREM NIWAS
                   </span>
                   <span className="bg-emerald-500/15 text-emerald-400 border border-emerald-500/30 text-[10px] font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
                     Live Portal
                   </span>
                 </div>
                 <p className="text-xs text-slate-400 hidden sm:block">
-                  Residential Unit Management • {rooms.length} Units
+                  Residential Unit Management â€¢ {rooms.length} Units
                 </p>
               </div>
             </div>

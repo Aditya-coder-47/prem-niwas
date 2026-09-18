@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   History, 
   Search, 
@@ -92,7 +92,7 @@ export const ActivityLogView: React.FC<ActivityLogViewProps> = ({ activityLogs }
         <div className="bg-white border border-slate-200 rounded-xl p-12 text-center text-slate-500">
           <Clock className="w-10 h-10 text-slate-300 mx-auto mb-2" />
           <p className="font-semibold text-sm text-slate-700">No matching audit logs found</p>
-          <p className="text-xs text-slate-400 mt-1">Actions performed across Amit Niwas will appear here automatically.</p>
+          <p className="text-xs text-slate-400 mt-1">Actions performed across PREM NIWAS will appear here automatically.</p>
         </div>
       ) : (
         <div className="bg-white border border-slate-200 rounded-xl overflow-hidden shadow-sm divide-y divide-slate-100">
@@ -116,7 +116,7 @@ export const ActivityLogView: React.FC<ActivityLogViewProps> = ({ activityLogs }
                 </div>
                 <div className="flex items-center space-x-2 text-[11px] text-slate-500">
                   <span>Operator: <strong className="text-slate-700">{log.performedByName}</strong></span>
-                  <span>•</span>
+                  <span>â€¢</span>
                   <span className="font-mono text-[10px] bg-slate-100 px-1.5 py-0.5 rounded text-slate-600">
                     {log.action}
                   </span>

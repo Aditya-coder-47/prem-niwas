@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { AuthProvider, useAuth } from './context/AuthContext';
 import { Navbar } from './components/Navbar';
 import { AuthScreen } from './components/auth/AuthScreen';
@@ -102,7 +102,7 @@ function MainApp() {
     return (
       <div className="min-h-screen bg-slate-950 flex flex-col items-center justify-center text-white">
         <Loader2 className="w-8 h-8 text-amber-500 animate-spin mb-3" />
-        <p className="text-sm text-slate-400 font-medium">Connecting to Amit Niwas...</p>
+        <p className="text-sm text-slate-400 font-medium">Connecting to PREM NIWAS...</p>
       </div>
     );
   }
@@ -255,7 +255,7 @@ function MainApp() {
                 renters={renters}
                 rooms={rooms}
                 currentUserId={currentUser?.uid || 'owner_admin'}
-                currentUserName={profile?.name || 'Amit Niwas Owner'}
+                currentUserName={profile?.name || 'Prem Niwas Owner'}
               />
             )}
 
@@ -376,10 +376,10 @@ function MainApp() {
       <footer className="mt-12 py-6 border-t border-slate-200 text-center text-xs text-slate-500 bg-white">
         <div className="max-w-7xl mx-auto px-4 flex flex-col sm:flex-row items-center justify-between gap-2">
           <span>
-            <strong>AMIT NIWAS</strong> • Phase 1 Residential Rental Management (15 Rooms)
+            <strong>PREM NIWAS</strong> â€¢ Phase 1 Residential Rental Management (15 Rooms)
           </span>
           <span className="text-slate-400">
-            Civil Lines Road • 15 Residential Units
+            Civil Lines Road â€¢ 15 Residential Units
           </span>
         </div>
       </footer>

@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+﻿import React, { useRef } from 'react';
 import { X, Printer, CheckCircle, Clock, AlertTriangle, Building, Phone, IndianRupee, ShieldCheck } from 'lucide-react';
 import { Bill } from '../../types';
 
@@ -70,12 +70,12 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   AN
                 </div>
                 <div>
-                  <h1 className="text-xl font-black tracking-tight text-slate-950">AMIT NIWAS</h1>
+                  <h1 className="text-xl font-black tracking-tight text-slate-950">PREM NIWAS</h1>
                   <p className="text-[11px] font-medium text-slate-600">Residential Rental Management</p>
                 </div>
               </div>
               <p className="text-[11px] text-slate-500 mt-2">
-                Plot 42, Civil Lines Road, Sector 4, Amit Niwas
+                Plot 42, Civil Lines Road, Sector 4, PREM NIWAS
               </p>
             </div>
 
@@ -131,23 +131,23 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                 <tr>
                   <th className="py-2.5 px-4">Description</th>
                   <th className="py-2.5 px-4 text-center">Details</th>
-                  <th className="py-2.5 px-4 text-right">Amount (₹)</th>
+                  <th className="py-2.5 px-4 text-right">Amount (â‚¹)</th>
                 </tr>
               </thead>
               <tbody className="divide-y divide-slate-150 text-slate-800">
                 <tr>
                   <td className="py-2.5 px-4 font-medium">Monthly Room Rent</td>
                   <td className="py-2.5 px-4 text-center text-slate-500">Room {bill.roomNumber}</td>
-                  <td className="py-2.5 px-4 text-right font-medium">₹{(bill.rent ?? bill.rentAmount ?? 0).toLocaleString('en-IN')}</td>
+                  <td className="py-2.5 px-4 text-right font-medium">â‚¹{(bill.rent ?? bill.rentAmount ?? 0).toLocaleString('en-IN')}</td>
                 </tr>
 
                 {Number(bill.electricityTotal || 0) > 0 && (
                   <tr>
                     <td className="py-2.5 px-4 font-medium">Electricity Charges</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">
-                      {bill.electricityUnits || 0} units @ ₹{bill.electricityRate || 8}/unit
+                      {bill.electricityUnits || 0} units @ â‚¹{bill.electricityRate || 8}/unit
                     </td>
-                    <td className="py-2.5 px-4 text-right font-medium">₹{(bill.electricityTotal || 0).toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{(bill.electricityTotal || 0).toLocaleString('en-IN')}</td>
                   </tr>
                 )}
 
@@ -155,7 +155,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   <tr>
                     <td className="py-2.5 px-4 font-medium">Water Supply & Overhead</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">Fixed Monthly</td>
-                    <td className="py-2.5 px-4 text-right font-medium">₹{bill.waterCharges?.toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{bill.waterCharges?.toLocaleString('en-IN')}</td>
                   </tr>
                 )}
 
@@ -163,7 +163,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   <tr>
                     <td className="py-2.5 px-4 font-medium">Building Maintenance & WiFi</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">Common Amenities</td>
-                    <td className="py-2.5 px-4 text-right font-medium">₹{bill.maintenanceCharges?.toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{bill.maintenanceCharges?.toLocaleString('en-IN')}</td>
                   </tr>
                 )}
 
@@ -171,7 +171,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                   <tr>
                     <td className="py-2.5 px-4 font-medium">{bill.otherChargesDesc || 'Other Services / Miscellaneous'}</td>
                     <td className="py-2.5 px-4 text-center text-slate-500">Extra Charges</td>
-                    <td className="py-2.5 px-4 text-right font-medium">₹{bill.otherCharges?.toLocaleString('en-IN')}</td>
+                    <td className="py-2.5 px-4 text-right font-medium">â‚¹{bill.otherCharges?.toLocaleString('en-IN')}</td>
                   </tr>
                 )}
               </tbody>
@@ -179,7 +179,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                 <tr>
                   <td colSpan={2} className="py-3 px-4 text-slate-900 text-sm">TOTAL PAYABLE</td>
                   <td className="py-3 px-4 text-right text-base text-slate-950 font-black">
-                    ₹{bill.totalAmount.toLocaleString('en-IN')}
+                    â‚¹{bill.totalAmount.toLocaleString('en-IN')}
                   </td>
                 </tr>
               </tfoot>
@@ -193,7 +193,7 @@ export const InvoiceModal: React.FC<InvoiceModalProps> = ({
                 <p><strong>Note:</strong> {bill.notes}</p>
               )}
               <p>Payment Modes: UPI (GPay / PhonePe / Paytm), Cash, or Direct Bank Transfer.</p>
-              <p className="text-[10px] text-slate-400">System-generated digital receipt. Amit Niwas Management.</p>
+              <p className="text-[10px] text-slate-400">System-generated digital receipt. Prem Niwas Management.</p>
             </div>
 
             {isPaid ? (

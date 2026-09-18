@@ -56,10 +56,10 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
 
   if (!isOpen || !bill) return null;
 
-  const upiId = settings?.upiId || 'amitniwas@okaxis';
-  const upiName = settings?.upiName || 'Amit Niwas Management';
+  const upiId = settings?.upiId || 'premniwas@okaxis';
+  const upiName = settings?.upiName || 'Prem Niwas Management';
 
-  const upiDeepLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(upiName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`Amit Niwas Bill R${bill.roomNumber}`)}`;
+  const upiDeepLink = `upi://pay?pa=${encodeURIComponent(upiId)}&pn=${encodeURIComponent(upiName)}&am=${amount}&cu=INR&tn=${encodeURIComponent(`PREM NIWAS Bill R${bill.roomNumber}`)}`;
 
   const handleCopyUpi = () => {
     navigator.clipboard.writeText(upiId);
@@ -73,12 +73,12 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
 
     const numAmount = Number(amount);
     if (isNaN(numAmount) || numAmount <= 0) {
-      setError('Please enter a valid payment amount greater than ₹0');
+      setError('Please enter a valid payment amount greater than â‚¹0');
       return;
     }
 
     if (numAmount > bill.remainingAmount) {
-      setError(`Payment amount cannot exceed remaining due (₹${bill.remainingAmount.toLocaleString('en-IN')})`);
+      setError(`Payment amount cannot exceed remaining due (â‚¹${bill.remainingAmount.toLocaleString('en-IN')})`);
       return;
     }
 
@@ -126,10 +126,10 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
         <div className="px-6 py-4 bg-slate-900 text-white flex items-center justify-between">
           <div>
             <h2 className="text-base font-bold">
-              {isOwner ? 'Record Rent / Bill Payment' : 'Pay Amit Niwas Bill'}
+              {isOwner ? 'Record Rent / Bill Payment' : 'Pay PREM NIWAS Bill'}
             </h2>
             <p className="text-xs text-slate-400">
-              Invoice {bill.invoiceNumber} • Room {bill.roomNumber} ({bill.renterName})
+              Invoice {bill.invoiceNumber} â€¢ Room {bill.roomNumber} ({bill.renterName})
             </p>
           </div>
           <button
@@ -153,11 +153,11 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
           <div className="bg-slate-50 p-3.5 rounded-xl border border-slate-200 flex items-center justify-between text-xs">
             <div>
               <span className="text-slate-500 block">Total Statement Amount:</span>
-              <span className="font-bold text-slate-900 text-sm">₹{bill.totalAmount.toLocaleString('en-IN')}</span>
+              <span className="font-bold text-slate-900 text-sm">â‚¹{bill.totalAmount.toLocaleString('en-IN')}</span>
             </div>
             <div className="text-right">
               <span className="text-slate-500 block">Remaining Due:</span>
-              <span className="font-extrabold text-amber-700 text-base">₹{bill.remainingAmount.toLocaleString('en-IN')}</span>
+              <span className="font-extrabold text-amber-700 text-base">â‚¹{bill.remainingAmount.toLocaleString('en-IN')}</span>
             </div>
           </div>
 
@@ -252,14 +252,14 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
           <div>
             <div className="flex justify-between items-center mb-1">
               <label className="text-xs font-bold text-slate-700 uppercase tracking-wider">
-                Payment Amount (₹)
+                Payment Amount (â‚¹)
               </label>
               <span className="text-[11px] text-slate-500 font-medium">
                 Full or partial amount accepted
               </span>
             </div>
             <div className="relative">
-              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">₹</span>
+              <span className="absolute left-3.5 top-1/2 -translate-y-1/2 text-slate-400 font-bold">â‚¹</span>
               <input
                 type="number"
                 min="1"
@@ -273,7 +273,7 @@ export const RecordPaymentModal: React.FC<RecordPaymentModalProps> = ({
             </div>
             {amount < bill.remainingAmount && (
               <p className="text-[11px] text-amber-700 mt-1 font-medium">
-                Remaining due after this payment: ₹{(bill.remainingAmount - amount).toLocaleString('en-IN')}
+                Remaining due after this payment: â‚¹{(bill.remainingAmount - amount).toLocaleString('en-IN')}
               </p>
             )}
           </div>

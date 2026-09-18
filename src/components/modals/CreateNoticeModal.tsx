@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { X, Bell, Pin, Plus, AlertCircle } from 'lucide-react';
 import { Notice } from '../../types';
 import { createNotice } from '../../services/db';
@@ -69,7 +69,7 @@ export const CreateNoticeModal: React.FC<CreateNoticeModalProps> = ({
               <span>Publish Building Notice</span>
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Broadcast an announcement to all residents of Amit Niwas.
+              Broadcast an announcement to all residents of PREM NIWAS.
             </p>
           </div>
           <button

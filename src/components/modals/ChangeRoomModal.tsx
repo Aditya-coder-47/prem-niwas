@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { X, ArrowRightLeft, DoorClosed, AlertCircle } from 'lucide-react';
 import { Renter, Room } from '../../types';
 import { changeRenterRoomAssignment } from '../../services/db';
@@ -71,7 +71,7 @@ export const ChangeRoomModal: React.FC<ChangeRoomModalProps> = ({
               <span>Change Room Assignment</span>
             </h2>
             <p className="text-xs text-slate-500 mt-0.5">
-              Reassign resident to a different vacant unit in Amit Niwas.
+              Reassign resident to a different vacant unit in PREM NIWAS.
             </p>
           </div>
           <button
@@ -96,8 +96,8 @@ export const ChangeRoomModal: React.FC<ChangeRoomModalProps> = ({
             <div className="font-bold text-slate-900 text-sm">{renter.fullName}</div>
             <div className="flex items-center space-x-2 text-slate-600 mt-1">
               <span>Current Unit: <strong>Room {renter.roomNumber || 'Unassigned'}</strong></span>
-              <span>•</span>
-              <span>Current Rent: <strong>₹{renter.monthlyRent}/mo</strong></span>
+              <span>â€¢</span>
+              <span>Current Rent: <strong>â‚¹{renter.monthlyRent}/mo</strong></span>
             </div>
           </div>
 
@@ -108,7 +108,7 @@ export const ChangeRoomModal: React.FC<ChangeRoomModalProps> = ({
             </label>
             {vacantRooms.length === 0 ? (
               <div className="p-3 bg-amber-50 border border-amber-200 rounded-lg text-xs text-amber-800">
-                No vacant units currently available in Amit Niwas to switch into.
+                No vacant units currently available in PREM NIWAS to switch into.
               </div>
             ) : (
               <select
@@ -118,7 +118,7 @@ export const ChangeRoomModal: React.FC<ChangeRoomModalProps> = ({
               >
                 {vacantRooms.map(r => (
                   <option key={r.id} value={r.id}>
-                    {r.roomName} — {r.floor} ({r.type}, Base: ₹{r.baseRent}/mo)
+                    {r.roomName} â€” {r.floor} ({r.type}, Base: â‚¹{r.baseRent}/mo)
                   </option>
                 ))}
               </select>
@@ -130,9 +130,9 @@ export const ChangeRoomModal: React.FC<ChangeRoomModalProps> = ({
             <div className="p-3 bg-blue-50/70 border border-blue-200 rounded-lg text-xs text-blue-950">
               <div className="font-bold text-blue-900 mb-1">Allotment Transfer Summary:</div>
               <div className="space-y-1 text-slate-700">
-                <div>• Previous Unit (Room {renter.roomNumber || '-'}) will automatically become <strong>Vacant</strong>.</div>
-                <div>• Target Unit (<strong>{targetRoom.roomName}</strong> on {targetRoom.floor}) will become <strong>Occupied</strong>.</div>
-                <div>• Updated Monthly Base Rent: <strong>₹{targetRoom.baseRent}/mo</strong>.</div>
+                <div>â€¢ Previous Unit (Room {renter.roomNumber || '-'}) will automatically become <strong>Vacant</strong>.</div>
+                <div>â€¢ Target Unit (<strong>{targetRoom.roomName}</strong> on {targetRoom.floor}) will become <strong>Occupied</strong>.</div>
+                <div>â€¢ Updated Monthly Base Rent: <strong>â‚¹{targetRoom.baseRent}/mo</strong>.</div>
               </div>
             </div>
           )}

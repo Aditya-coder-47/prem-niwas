@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+﻿import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
 import { 
   User,
   onAuthStateChanged,
@@ -129,7 +129,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const updatedProfile: Record<string, any> = {
           uid: user.uid,
           email: userEmail,
-          name: data.name || (isOwner ? 'Amit Niwas Owner' : (user.displayName || userEmail.split('@')[0] || 'Resident Applicant')),
+          name: data.name || (isOwner ? 'Prem Niwas Owner' : (user.displayName || userEmail.split('@')[0] || 'Resident Applicant')),
           role: assignedRole,
           approvalStatus: isOwner ? 'approved' : (data.approvalStatus || 'pending'),
           createdAt: data.createdAt || new Date().toISOString()
@@ -149,7 +149,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
         const newProfile: Record<string, any> = {
           uid: user.uid,
           email: userEmail,
-          name: isOwner ? 'Amit Niwas Owner' : (user.displayName || userEmail.split('@')[0] || 'Resident Applicant'),
+          name: isOwner ? 'Prem Niwas Owner' : (user.displayName || userEmail.split('@')[0] || 'Resident Applicant'),
           role: assignedRole,
           approvalStatus: isOwner ? 'approved' : 'pending',
           createdAt: new Date().toISOString()
@@ -172,7 +172,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
       setProfile({
         uid: user.uid,
         email: user.email || '',
-        name: isOwner ? 'Amit Niwas Owner' : 'Resident Applicant',
+        name: isOwner ? 'Prem Niwas Owner' : 'Resident Applicant',
         role: assignedRole,
         approvalStatus: isOwner ? 'approved' : 'pending'
       });

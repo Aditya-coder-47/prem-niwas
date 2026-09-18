@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { 
   Users, 
   Search, 
@@ -93,7 +93,7 @@ export const RentersView: React.FC<RentersViewProps> = ({
           <div>
             <h1 className="text-xl font-bold text-slate-900 flex items-center space-x-2">
               <Users className="w-5 h-5 text-amber-500" />
-              <span>Renters Directory & KYC — Amit Niwas</span>
+              <span>Renters Directory & KYC â€” PREM NIWAS</span>
             </h1>
             <p className="text-xs text-slate-500 mt-1">
               Review residential tenant signups, approve room allotments, manage active tenancies, and inspect KYC.
@@ -265,8 +265,8 @@ export const RentersView: React.FC<RentersViewProps> = ({
                   {/* Financial & Tenancy info for active */}
                   {isActive && (
                     <div className="flex items-center space-x-4 text-xs text-slate-500 pt-1">
-                      <span>Monthly Rent: <strong className="text-slate-800">₹{renter.monthlyRent?.toLocaleString('en-IN') || 0}</strong></span>
-                      <span>Deposit: <strong className="text-slate-800">₹{renter.securityDeposit?.toLocaleString('en-IN') || 0}</strong></span>
+                      <span>Monthly Rent: <strong className="text-slate-800">â‚¹{renter.monthlyRent?.toLocaleString('en-IN') || 0}</strong></span>
+                      <span>Deposit: <strong className="text-slate-800">â‚¹{renter.securityDeposit?.toLocaleString('en-IN') || 0}</strong></span>
                       <span>Lease Start: <strong className="text-slate-800">{renter.leaseStartDate || '-'}</strong></span>
                     </div>
                   )}

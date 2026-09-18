@@ -1,4 +1,4 @@
-import React from 'react';
+﻿import React from 'react';
 import { 
   Building2, 
   Clock, 
@@ -38,10 +38,10 @@ export const PendingApprovalScreen: React.FC<PendingApprovalScreenProps> = ({
             <Building2 className="w-8 h-8 text-slate-950" />
           </div>
           <h1 className="text-2xl font-extrabold text-white tracking-wider">
-            AMIT NIWAS
+            PREM NIWAS
           </h1>
           <p className="text-xs text-slate-400 mt-0.5">
-            Residential Rental Management • Civil Lines Road
+            Residential Rental Management â€¢ Civil Lines Road
           </p>
         </div>
 
@@ -133,7 +133,7 @@ export const PendingApprovalScreen: React.FC<PendingApprovalScreenProps> = ({
         </div>
 
         <p className="mt-4 text-center text-xs text-slate-500">
-          Amit Niwas Management • Contact Owner: <strong>{PERMANENT_OWNER_EMAIL}</strong>
+          Prem Niwas Management â€¢ Contact Owner: <strong>{PERMANENT_OWNER_EMAIL}</strong>
         </p>
 
       </div>

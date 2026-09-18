@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+﻿import React, { useState, useEffect, useRef } from 'react';
 import { 
   MessageSquare, 
   Send, 
@@ -27,7 +27,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
   renters,
   rooms,
   currentUserId = 'owner_user',
-  currentUserName = 'Amit Niwas Management'
+  currentUserName = 'Prem Niwas Management'
 }) => {
   const [messages, setMessages] = useState<ChatMessage[]>([]);
   const [selectedRecipientId, setSelectedRecipientId] = useState<string>('all'); // 'all' or renterId
@@ -95,7 +95,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
     setSending(true);
     try {
       await sendChatMessage({
-        buildingId: 'building_amit_niwas',
+        buildingId: 'building_prem_niwas',
         senderId: currentUserId,
         senderName: currentUserName,
         senderRole: 'owner',
@@ -119,10 +119,10 @@ export const ChatView: React.FC<ChatViewProps> = ({
   };
 
   const quickPresets = [
-    '👋 Reminder: Monthly rent & electricity bill has been generated.',
-    '💧 Notice: Overhead water tank sanitization scheduled.',
-    '✅ Payment received and verified. Thank you!',
-    '🔧 Maintenance team has been notified and is inspecting.'
+    'ðŸ‘‹ Reminder: Monthly rent & electricity bill has been generated.',
+    'ðŸ’§ Notice: Overhead water tank sanitization scheduled.',
+    'âœ… Payment received and verified. Thank you!',
+    'ðŸ”§ Maintenance team has been notified and is inspecting.'
   ];
 
   return (
@@ -134,7 +134,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
           <span>Tenant Communication & Direct Chat</span>
         </h1>
         <p className="text-xs text-slate-400 mt-1">
-          Real-time messaging between Amit Niwas management and residents.
+          Real-time messaging between Prem Niwas Management and residents.
         </p>
       </div>
 
@@ -227,7 +227,7 @@ export const ChatView: React.FC<ChatViewProps> = ({
                         )}
                       </div>
                       <p className="text-[11px] text-slate-400 truncate mt-0.5">
-                        {renter.roomNumber ? `Room ${renter.roomNumber}` : 'Applicant'} • {renter.phone}
+                        {renter.roomNumber ? `Room ${renter.roomNumber}` : 'Applicant'} â€¢ {renter.phone}
                       </p>
                     </div>
                   </button>

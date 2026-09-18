@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+﻿import React, { useState, useEffect } from 'react';
 import { 
   X, 
   CheckCircle2, 
@@ -123,7 +123,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
               <h2 className="text-lg font-bold text-slate-900">Review Resident Application</h2>
             </div>
             <p className="text-xs text-slate-500 mt-0.5">
-              Applicant KYC review and room allotment for Amit Niwas.
+              Applicant KYC review and room allotment for PREM NIWAS.
             </p>
           </div>
           <button
@@ -186,7 +186,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
             <div className="pt-2 border-t border-slate-200 text-slate-600">
               <span className="font-semibold text-slate-700 block text-[10px] uppercase">Emergency Contact:</span>
               <p className="mt-0.5">
-                {applicant.emergencyContactName} ({applicant.emergencyContactRelation}) • {applicant.emergencyContactPhone}
+                {applicant.emergencyContactName} ({applicant.emergencyContactRelation}) â€¢ {applicant.emergencyContactPhone}
               </p>
             </div>
           </div>
@@ -204,7 +204,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
                   </label>
                   {vacantRooms.length === 0 ? (
                     <div className="p-2.5 bg-rose-50 border border-rose-200 rounded-lg text-xs text-rose-700">
-                      No vacant rooms available in Amit Niwas.
+                      No vacant rooms available in PREM NIWAS.
                     </div>
                   ) : (
                     <select
@@ -214,7 +214,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
                     >
                       {vacantRooms.map(r => (
                         <option key={r.id} value={r.id}>
-                          {r.roomName} — {r.floor} ({r.type}, Base: ₹{r.baseRent}/mo)
+                          {r.roomName} â€” {r.floor} ({r.type}, Base: â‚¹{r.baseRent}/mo)
                         </option>
                       ))}
                     </select>
@@ -236,7 +236,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Monthly Rent (₹) *
+                    Monthly Rent (â‚¹) *
                   </label>
                   <input
                     type="number"
@@ -251,7 +251,7 @@ export const ApproveRenterModal: React.FC<ApproveRenterModalProps> = ({
 
                 <div>
                   <label className="block text-xs font-semibold text-slate-700 mb-1">
-                    Security Deposit Received (₹) *
+                    Security Deposit Received (â‚¹) *
                   </label>
                   <input
                     type="number"

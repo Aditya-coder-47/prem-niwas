@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+﻿import React, { useState } from 'react';
 import { 
   Bell, 
   Plus, 
@@ -56,7 +56,7 @@ export const NoticesView: React.FC<NoticesViewProps> = ({
             <span>Building Notice Board</span>
           </h1>
           <p className="text-xs text-slate-500 mt-1">
-            Official announcements, maintenance schedules, and building rules for Amit Niwas.
+            Official announcements, maintenance schedules, and building rules for PREM NIWAS.
           </p>
         </div>
 
@@ -147,7 +147,7 @@ export const NoticesView: React.FC<NoticesViewProps> = ({
               <div className="mt-4 pt-3 border-t border-slate-100 flex items-center justify-between text-[11px] text-slate-400">
                 <span className="flex items-center space-x-1">
                   <User className="w-3 h-3" />
-                  <span>{notice.createdByName || 'Amit Niwas Office'}</span>
+                  <span>{notice.createdByName || 'Prem Niwas Office'}</span>
                 </span>
                 <span className="flex items-center space-x-1">
                   <Calendar className="w-3 h-3" />

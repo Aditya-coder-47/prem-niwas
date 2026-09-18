@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+﻿import React, { useRef } from 'react';
 import { X, Printer, CheckCircle, ShieldCheck, IndianRupee, Building2, Calendar, User, DoorClosed, CreditCard } from 'lucide-react';
 import { Payment } from '../../types';
 
@@ -65,12 +65,12 @@ export const PaymentReceiptModal: React.FC<PaymentReceiptModalProps> = ({
                   AN
                 </div>
                 <div>
-                  <h1 className="text-xl font-black tracking-tight text-slate-950">AMIT NIWAS</h1>
+                  <h1 className="text-xl font-black tracking-tight text-slate-950">PREM NIWAS</h1>
                   <p className="text-[11px] font-semibold text-slate-600 uppercase tracking-wider">Official Payment Receipt</p>
                 </div>
               </div>
               <p className="text-[11px] text-slate-500 mt-2">
-                Plot 42, Civil Lines Road, Sector 4, Amit Niwas Residential
+                Plot 42, Civil Lines Road, Sector 4, Prem Niwas Residential
               </p>
             </div>
 
@@ -124,14 +124,14 @@ export const PaymentReceiptModal: React.FC<PaymentReceiptModalProps> = ({
                   Amount Received
                 </span>
                 <div className="text-3xl font-black text-amber-400 mt-1 flex items-baseline">
-                  <span>₹{payment.amount.toLocaleString('en-IN')}</span>
+                  <span>â‚¹{payment.amount.toLocaleString('en-IN')}</span>
                   <span className="text-xs text-slate-300 ml-2 font-normal">INR (Whole Rupees)</span>
                 </div>
               </div>
               <div className="text-right text-xs">
                 <span className="text-slate-400 block text-[10px] uppercase">Remaining Due</span>
                 <span className="font-bold text-base text-white">
-                  ₹{payment.remainingDueAfterPayment.toLocaleString('en-IN')}
+                  â‚¹{payment.remainingDueAfterPayment.toLocaleString('en-IN')}
                 </span>
               </div>
             </div>
@@ -173,11 +173,11 @@ export const PaymentReceiptModal: React.FC<PaymentReceiptModalProps> = ({
           <div className="pt-6 border-t border-slate-200 flex items-center justify-between text-[11px] text-slate-500">
             <div className="flex items-center space-x-1.5">
               <ShieldCheck className="w-4 h-4 text-emerald-600" />
-              <span>Computer Generated Official Receipt • Amit Niwas</span>
+              <span>Computer Generated Official Receipt â€¢ PREM NIWAS</span>
             </div>
             <div className="text-right">
               <span className="font-semibold text-slate-800 block">Authorized Signatory</span>
-              <span className="text-[10px] text-slate-400">Amit Niwas Management</span>
+              <span className="text-[10px] text-slate-400">Prem Niwas Management</span>
             </div>
           </div>
         </div>
