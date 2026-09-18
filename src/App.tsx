@@ -178,6 +178,10 @@ function MainApp() {
                   setIsRegisterOpen(true);
                 }}
                 onOpenNoticeModal={() => setIsNoticeModalOpen(true)}
+                onApproveApplicant={(applicant) => {
+                  setSelectedApplicantForApprove(applicant);
+                  setIsApproveOpen(true);
+                }}
                 onSelectRoom={(room) => {
                   if (room.status === 'vacant') {
                     setPreSelectedRoom(room);

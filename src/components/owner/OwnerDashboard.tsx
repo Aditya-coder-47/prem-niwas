@@ -29,6 +29,7 @@ interface OwnerDashboardProps {
   onNavigateTab: (tab: string, filter?: string) => void;
   onOpenRegisterModal: () => void;
   onOpenNoticeModal: () => void;
+  onApproveApplicant: (renter: Renter) => void;
   onSelectRoom: (room: Room) => void;
 }
 
@@ -40,6 +41,7 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
   onNavigateTab,
   onOpenRegisterModal,
   onOpenNoticeModal,
+  onApproveApplicant,
   onSelectRoom
 }) => {
   const totalRooms = rooms.length;
@@ -159,33 +161,52 @@ export const OwnerDashboard: React.FC<OwnerDashboardProps> = ({
         </div>
       </div>
 
-      {/* ===== PENDING APPLICANTS HIGH-PRIORITY ALERT ===== */}
+      {/* ===== PENDING APPLICATIONS SECTION ===== */}
       {pendingApplicants.length > 0 && (
-        <div className="bg-gradient-to-r from-amber-50 via-amber-100/50 to-amber-50 border-2 border-amber-300/80 rounded-2xl p-4 sm:p-5 flex flex-col sm:flex-row sm:items-center justify-between gap-3.5 shadow-sm">
-          <div className="flex items-start sm:items-center space-x-3.5">
-            <div className="w-10 h-10 rounded-2xl bg-amber-500 text-slate-950 font-black flex items-center justify-center flex-shrink-0 text-sm shadow-md shadow-amber-500/30 animate-pulse">
-              {pendingApplicants.length}
-            </div>
-            <div>
-              <h4 className="font-extrabold text-slate-900 text-sm sm:text-base flex items-center space-x-2">
-                <span>{pendingApplicants.length} Resident Application{pendingApplicants.length > 1 ? 's' : ''} Pending Review</span>
-                <span className="text-[10px] bg-amber-200 text-amber-950 font-bold px-2 py-0.5 rounded-full uppercase tracking-wider">
-                  Action Required
-                </span>
-              </h4>
-              <p className="text-xs text-slate-600 mt-0.5">
-                Prospective residents have signed up. Verify their identity/KYC and allot vacant rooms to grant portal access.
-              </p>
+        <div className="bg-slate-900 border border-slate-800 rounded-3xl p-5 sm:p-6 sm:px-8 shadow-2xl relative overflow-hidden">
+          <div className="absolute top-0 right-0 w-64 h-64 bg-amber-500/5 rounded-full blur-3xl -mr-20 -mt-20 pointer-events-none"></div>
+          
+          <div className="flex items-center justify-between mb-5 relative z-10">
+            <div className="flex items-center space-x-3">
+              <div className="p-2.5 bg-amber-500/20 rounded-xl border border-amber-500/30">
+                <UserPlus className="w-6 h-6 text-amber-400" />
+              </div>
+              <div>
+                <h3 className="text-lg font-bold text-white tracking-wide">Pending Applications</h3>
+                <p className="text-xs text-amber-400/80 font-medium">{pendingApplicants.length} applicant{pendingApplicants.length !== 1 ? 's' : ''} waiting for review</p>
+              </div>
             </div>
           </div>
-          <button
-            id="view-pending-applicants-btn"
-            onClick={() => onNavigateTab('renters', 'pending_approval')}
-            className="w-full sm:w-auto px-4 py-2.5 bg-slate-950 hover:bg-slate-900 text-amber-400 text-xs font-extrabold rounded-xl shadow-md whitespace-nowrap transition-all active:scale-95 flex items-center justify-center space-x-1.5"
-          >
-            <span>Review &amp; Allot Units</span>
-            <ArrowRight className="w-3.5 h-3.5" />
-          </button>
+
+          <div className="space-y-3 relative z-10">
+            {pendingApplicants.map((applicant) => (
+              <div key={applicant.id} className="flex flex-col sm:flex-row sm:items-center justify-between bg-slate-800/50 hover:bg-slate-800/80 border border-slate-700/60 rounded-2xl p-4 gap-4 transition-all">
+                <div className="flex items-start sm:items-center space-x-4">
+                  <div className="w-10 h-10 rounded-full bg-slate-700 flex items-center justify-center flex-shrink-0 border border-slate-600">
+                    <span className="text-sm font-bold text-slate-300">
+                      {applicant.fullName.charAt(0).toUpperCase()}
+                    </span>
+                  </div>
+                  <div>
+                    <h4 className="text-sm font-bold text-white">{applicant.fullName}</h4>
+                    <div className="flex items-center text-xs text-slate-400 mt-1 space-x-3">
+                      <span className="flex items-center"><Clock className="w-3 h-3 mr-1" /> {new Date(applicant.createdAt).toLocaleDateString()}</span>
+                      <span className="hidden sm:inline-block border-l border-slate-700 h-3"></span>
+                      <span className="truncate">{applicant.email}</span>
+                    </div>
+                  </div>
+                </div>
+                
+                <button
+                  onClick={() => onApproveApplicant(applicant)}
+                  className="w-full sm:w-auto px-4 py-2 bg-amber-500 hover:bg-amber-400 text-slate-950 font-bold text-xs rounded-xl flex items-center justify-center transition-colors shadow-lg shadow-amber-500/20"
+                >
+                  <ShieldCheck className="w-4 h-4 mr-2" />
+                  Review & Approve
+                </button>
+              </div>
+            ))}
+          </div>
         </div>
       )}
 
