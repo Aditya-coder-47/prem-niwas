@@ -1,0 +1,218 @@
+{
+  "entities": {
+    "UserProfile": {
+      "collection": "users",
+      "fields": {
+        "uid": { "type": "string", "description": "Firebase Auth User ID" },
+        "email": { "type": "string", "description": "Email address" },
+        "name": { "type": "string", "description": "User display name" },
+        "role": { "type": "string", "description": "'owner' or 'renter'" },
+        "phone": { "type": "string", "description": "Phone number" },
+        "renterId": { "type": "string", "description": "Linked renter profile ID if renter role" },
+        "createdAt": { "type": "string", "description": "ISO timestamp of account creation" }
+      }
+    },
+    "Building": {
+      "collection": "buildings",
+      "fields": {
+        "id": { "type": "string", "description": "Unique building ID e.g. building_amit_niwas" },
+        "name": { "type": "string", "description": "Building name, e.g. Amit Niwas" },
+        "totalRooms": { "type": "number", "description": "Total room count (15 in Phase 1)" },
+        "address": { "type": "string", "description": "Building location address" },
+        "floors": { "type": "number", "description": "Number of floors (3)" }
+      }
+    },
+    "Room": {
+      "collection": "rooms",
+      "fields": {
+        "id": { "type": "string", "description": "Unique room ID, e.g. room_1 to room_15" },
+        "buildingId": { "type": "string", "description": "Parent building ID" },
+        "roomNumber": { "type": "number", "description": "Integer 1 to 15" },
+        "roomName": { "type": "string", "description": "Room display name, e.g. Room 1" },
+        "floor": { "type": "string", "description": "Ground Floor, 1st Floor, 2nd Floor" },
+        "type": { "type": "string", "description": "Single Room, 1 RK, 1 BHK" },
+        "baseRent": { "type": "number", "description": "Standard monthly rent amount" },
+        "status": { "type": "string", "description": "'vacant' or 'occupied'" },
+        "currentRenterId": { "type": "string", "description": "ID of current tenant or null" },
+        "currentRenterName": { "type": "string", "description": "Name of current tenant or null" },
+        "updatedAt": { "type": "string", "description": "Timestamp of last modification" }
+      }
+    },
+    "Renter": {
+      "collection": "renters",
+      "fields": {
+        "id": { "type": "string", "description": "Unique renter record ID" },
+        "buildingId": { "type": "string", "description": "Parent building ID" },
+        "userId": { "type": "string", "description": "Linked Firebase Auth UID if user account exists" },
+        "fullName": { "type": "string", "description": "Full legal name" },
+        "phone": { "type": "string", "description": "Primary phone number" },
+        "email": { "type": "string", "description": "Email address" },
+        "govIdType": { "type": "string", "description": "Govt identification type" },
+        "govIdNumber": { "type": "string", "description": "Govt ID number" },
+        "emergencyContactName": { "type": "string", "description": "Emergency contact person" },
+        "emergencyContactPhone": { "type": "string", "description": "Emergency contact phone" },
+        "permanentAddress": { "type": "string", "description": "Home/permanent address" },
+        "occupation": { "type": "string", "description": "Current profession" },
+        "workplace": { "type": "string", "description": "Company / workplace name" },
+        "roomId": { "type": "string", "description": "Assigned room ID or null" },
+        "roomNumber": { "type": "number", "description": "Assigned room number or null" },
+        "monthlyRent": { "type": "number", "description": "Agreed monthly rent" },
+        "securityDeposit": { "type": "number", "description": "Security deposit received" },
+        "leaseStartDate": { "type": "string", "description": "Lease commencement date" },
+        "status": { "type": "string", "description": "'active' or 'checked_out'" },
+        "checkoutDate": { "type": "string", "description": "Checkout date if checked out" },
+        "checkoutNotes": { "type": "string", "description": "Remarks on checkout" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      }
+    },
+    "Notice": {
+      "collection": "notices",
+      "fields": {
+        "id": { "type": "string", "description": "Notice ID" },
+        "buildingId": { "type": "string", "description": "Building ID" },
+        "title": { "type": "string", "description": "Notice headline" },
+        "content": { "type": "string", "description": "Full notice message" },
+        "category": { "type": "string", "description": "Category (General, Maintenance, Emergency)" },
+        "isPinned": { "type": "boolean", "description": "Pin to top" },
+        "createdAt": { "type": "string", "description": "Timestamp" },
+        "createdByName": { "type": "string", "description": "Owner / creator name" }
+      }
+    },
+    "ActivityLog": {
+      "collection": "activity_logs",
+      "fields": {
+        "id": { "type": "string", "description": "Log entry ID" },
+        "buildingId": { "type": "string", "description": "Building ID" },
+        "action": { "type": "string", "description": "Action type" },
+        "description": { "type": "string", "description": "Human readable event summary" },
+        "performedByName": { "type": "string", "description": "User who carried out action" },
+        "targetType": { "type": "string", "description": "Target entity" },
+        "targetId": { "type": "string", "description": "Target ID" },
+        "timestamp": { "type": "string", "description": "Log timestamp" }
+      }
+    },
+    "Bill": {
+      "collection": "bills",
+      "fields": {
+        "id": { "type": "string", "description": "Unique bill ID" },
+        "invoiceNumber": { "type": "string", "description": "Invoice number format INV-AN-YYYYMM-XXXX" },
+        "renterId": { "type": "string", "description": "Recipient renter ID" },
+        "renterName": { "type": "string", "description": "Renter name" },
+        "renterPhone": { "type": "string", "description": "Renter phone number" },
+        "roomId": { "type": "string", "description": "Assigned room ID" },
+        "roomNumber": { "type": "number", "description": "Assigned room number" },
+        "billingPeriod": { "type": "string", "description": "Billing month and year e.g. September 2026" },
+        "billDate": { "type": "string", "description": "Issue date YYYY-MM-DD" },
+        "dueDate": { "type": "string", "description": "Payment due date YYYY-MM-DD" },
+        "rent": { "type": "number", "description": "Room base rent" },
+        "annualIncreasePercent": { "type": "number", "description": "Applied annual rent increase percent" },
+        "electricityBillingType": { "type": "string", "description": "'meter_based' or 'included_in_rent'" },
+        "previousMeterReading": { "type": "number", "description": "Previous approved reading" },
+        "presentMeterReading": { "type": "number", "description": "Present approved reading" },
+        "electricityUnits": { "type": "number", "description": "Units consumed" },
+        "electricityRate": { "type": "number", "description": "Electricity rate used at generation (e.g. 8)" },
+        "electricityAmount": { "type": "number", "description": "Calculated electricity bill" },
+        "waterAmount": { "type": "number", "description": "Water bill amount" },
+        "backDues": { "type": "number", "description": "Unpaid balance from past billing periods" },
+        "subtotal": { "type": "number", "description": "Current month charges" },
+        "totalAmount": { "type": "number", "description": "Subtotal plus back dues" },
+        "paidAmount": { "type": "number", "description": "Cumulative amount paid towards this bill" },
+        "remainingAmount": { "type": "number", "description": "Unpaid balance for this bill" },
+        "status": { "type": "string", "description": "'unpaid', 'partially_paid', 'paid', or 'cancelled'" },
+        "cancelledAt": { "type": "string", "description": "Cancellation timestamp" },
+        "cancelledBy": { "type": "string", "description": "Owner who cancelled" },
+        "cancellationReason": { "type": "string", "description": "Reason for cancellation" },
+        "createdAt": { "type": "string", "description": "ISO creation timestamp" },
+        "updatedAt": { "type": "string", "description": "ISO last update timestamp" }
+      }
+    },
+    "MeterReading": {
+      "collection": "meter_readings",
+      "fields": {
+        "id": { "type": "string", "description": "Meter reading ID" },
+        "renterId": { "type": "string", "description": "Submitting renter ID" },
+        "renterName": { "type": "string", "description": "Renter full name" },
+        "roomId": { "type": "string", "description": "Room ID" },
+        "roomNumber": { "type": "number", "description": "Room number" },
+        "billingPeriod": { "type": "string", "description": "Billing period" },
+        "previousReading": { "type": "number", "description": "Previous verified meter reading" },
+        "enteredReading": { "type": "number", "description": "Renter entered present reading" },
+        "aiDetectedReading": { "type": "number", "description": "AI detected meter number from photo" },
+        "units": { "type": "number", "description": "Difference: enteredReading - previousReading" },
+        "electricityRate": { "type": "number", "description": "Rate at submission time" },
+        "electricityAmount": { "type": "number", "description": "Calculated electricity amount" },
+        "photoUrl": { "type": "string", "description": "Uploaded meter image URL" },
+        "photoStoragePath": { "type": "string", "description": "Storage path" },
+        "status": { "type": "string", "description": "'pending_approval', 'approved', or 'rejected'" },
+        "rejectionReason": { "type": "string", "description": "Reason provided on rejection" },
+        "submittedAt": { "type": "string", "description": "ISO submission timestamp" },
+        "approvedAt": { "type": "string", "description": "ISO approval timestamp" },
+        "approvedBy": { "type": "string", "description": "Name/UID of approver" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" },
+        "updatedAt": { "type": "string", "description": "Update timestamp" }
+      }
+    },
+    "Payment": {
+      "collection": "payments",
+      "fields": {
+        "id": { "type": "string", "description": "Unique payment ID" },
+        "receiptId": { "type": "string", "description": "Official receipt code format REC-YYYYMM-ROOM-XXX" },
+        "billId": { "type": "string", "description": "Associated bill ID" },
+        "renterId": { "type": "string", "description": "Renter ID" },
+        "renterName": { "type": "string", "description": "Renter display name" },
+        "roomId": { "type": "string", "description": "Room ID" },
+        "roomNumber": { "type": "number", "description": "Room number" },
+        "amount": { "type": "number", "description": "Payment amount in INR" },
+        "method": { "type": "string", "description": "'Cash', 'UPI', 'QR', or 'Bank Transfer'" },
+        "status": { "type": "string", "description": "'pending_verification', 'verified', or 'rejected'" },
+        "transactionId": { "type": "string", "description": "UPI/Bank reference code" },
+        "remainingDueAfterPayment": { "type": "number", "description": "Remaining bill balance" },
+        "paidAt": { "type": "string", "description": "Payment timestamp" },
+        "verifiedAt": { "type": "string", "description": "Verification timestamp" },
+        "verifiedBy": { "type": "string", "description": "Owner identifier" },
+        "createdAt": { "type": "string", "description": "Creation timestamp" }
+      }
+    },
+    "RentHistory": {
+      "collection": "rent_history",
+      "fields": {
+        "id": { "type": "string", "description": "Rent record ID" },
+        "renterId": { "type": "string", "description": "Target renter ID" },
+        "renterName": { "type": "string", "description": "Renter name" },
+        "effectiveDate": { "type": "string", "description": "Anniversary date YYYY-MM-DD" },
+        "previousRent": { "type": "number", "description": "Starting rent amount" },
+        "increasePercent": { "type": "number", "description": "Annual increase percent e.g. 5" },
+        "increaseAmount": { "type": "number", "description": "Rounded rupee increment" },
+        "newRent": { "type": "number", "description": "New monthly rent" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      }
+    },
+    "BuildingSettings": {
+      "collection": "building_settings",
+      "fields": {
+        "id": { "type": "string", "description": "Settings doc ID" },
+        "buildingName": { "type": "string", "description": "Name of building" },
+        "defaultAnnualIncrease": { "type": "number", "description": "Default annual rent increase %" },
+        "electricityRate": { "type": "number", "description": "Current electricity rate per unit" },
+        "defaultWaterCharges": { "type": "number", "description": "Default water charge" },
+        "upiId": { "type": "string", "description": "Owner payment UPI VPA" },
+        "upiName": { "type": "string", "description": "Display name for UPI payment" },
+        "qrCodeUrl": { "type": "string", "description": "Uploaded UPI QR code image" },
+        "updatedAt": { "type": "string", "description": "ISO update timestamp" }
+      }
+    },
+    "ChatMessage": {
+      "collection": "chat_messages",
+      "fields": {
+        "id": { "type": "string", "description": "Message ID" },
+        "senderId": { "type": "string", "description": "Sender User ID or Renter ID" },
+        "senderName": { "type": "string", "description": "Sender display name" },
+        "senderRole": { "type": "string", "description": "'owner' or 'renter'" },
+        "receiverId": { "type": "string", "description": "Target renter ID or 'owner' or 'all'" },
+        "text": { "type": "string", "description": "Message text" },
+        "read": { "type": "boolean", "description": "Read flag" },
+        "createdAt": { "type": "string", "description": "ISO timestamp" }
+      }
+    }
+  }
+}

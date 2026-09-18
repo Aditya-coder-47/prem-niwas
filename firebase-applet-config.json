@@ -1,0 +1,12 @@
+﻿{
+  "projectId": "prem-niwas",
+  "appId": "1:529430145969:web:abf399819e5d83d862ab90",
+  "apiKey": "AIzaSyBKj92EaU5NJ80-jrLL8phiBZWUa3-El5Y",
+  "authDomain": "prem-niwas.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "prem-niwas.firebasestorage.app",
+  "messagingSenderId": "529430145969",
+  "measurementId": "G-NSRPHWFNRJ",
+  "oAuthClientId": "",
+  "recaptchaSiteKey": ""
+}

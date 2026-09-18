@@ -1,0 +1,83 @@
+rules_version = '2';
+service cloud.firestore {
+  match /databases/{database}/documents {
+    // Helper functions
+    function isAuthenticated() {
+      return request.auth != null;
+    }
+
+    function isOwner() {
+      return isAuthenticated() && (
+        !exists(/databases/$(database)/documents/users/$(request.auth.uid)) ||
+        get(/databases/$(database)/documents/users/$(request.auth.uid)).data.role == 'owner'
+      );
+    }
+
+    // Users collection
+    match /users/{userId} {
+      allow read, write: if true;
+    }
+
+    // Building metadata
+    match /buildings/{buildingId} {
+      allow read, write: if true;
+    }
+
+    // 15 Rooms
+    match /rooms/{roomId} {
+      allow read, write: if true;
+    }
+
+    // Renters
+    match /renters/{renterId} {
+      allow read, write: if true;
+    }
+
+    // Notices
+    match /notices/{noticeId} {
+      allow read, write: if true;
+    }
+
+    // Activity / Audit Logs
+    match /activity_logs/{logId} {
+      allow read, create: if true;
+      allow update, delete: if false; // Immutable audit trail
+    }
+
+    // Bills and invoices
+    match /bills/{billId} {
+      allow read, write: if true;
+    }
+
+    // Meter Readings
+    match /meter_readings/{readingId} {
+      allow read, write: if true;
+    }
+
+    // Payments & Receipts
+    match /payments/{paymentId} {
+      allow read, write: if true;
+    }
+
+    // Rent History (Anniversary Rent Increases)
+    match /rent_history/{recordId} {
+      allow read, write: if true;
+    }
+
+    // Building Settings (Electricity rate, Default Water, UPI ID, QR)
+    match /building_settings/{settingsId} {
+      allow read, write: if true;
+    }
+
+    // Water Charges
+    match /water_charges/{chargeId} {
+      allow read, write: if true;
+    }
+
+    // Real-time Chat Messages
+    match /chat_messages/{messageId} {
+      allow read, write: if true;
+    }
+  }
+}
+
