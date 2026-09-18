@@ -1,12 +1,12 @@
-{
-    "projectId":  "oval-tune-hvd6f",
-    "appId":  "1:988562431254:web:e569b5fc704a66dd284437",
-    "apiKey":  "AIzaSyBGos4W26YGLPLfM7WC3_5N_4LV7CooKyU",
-    "authDomain":  "oval-tune-hvd6f.firebaseapp.com",
-    "firestoreDatabaseId":  "(default)",
-    "storageBucket":  "oval-tune-hvd6f.firebasestorage.app",
-    "messagingSenderId":  "988562431254",
-    "measurementId":  "",
-    "oAuthClientId":  "988562431254-l7pkef8tn64r5t4if0da0h74b7om4do3.apps.googleusercontent.com",
-    "recaptchaSiteKey":  ""
+﻿{
+  "projectId": "prem-niwas",
+  "appId": "1:529430145969:web:abf399819e5d83d862ab90",
+  "apiKey": "AIzaSyBKj92EaU5NJ80-jrLL8phiBZWUa3-El5Y",
+  "authDomain": "prem-niwas.firebaseapp.com",
+  "firestoreDatabaseId": "(default)",
+  "storageBucket": "prem-niwas.firebasestorage.app",
+  "messagingSenderId": "529430145969",
+  "measurementId": "G-NSRPHWFNRJ",
+  "oAuthClientId": "",
+  "recaptchaSiteKey": ""
 }
