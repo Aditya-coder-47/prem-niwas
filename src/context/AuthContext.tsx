@@ -1,4 +1,4 @@
-import { createContext, useContext, useState, useEffect, ReactNode } from 'react';
+import { createContext, useContext, useState, useEffect, useRef, ReactNode } from 'react';
 import { 
   User,
   onAuthStateChanged,
@@ -53,7 +53,7 @@ export function AuthProvider({ children }: { children: ReactNode }) {
   const [allRenters, setAllRenters] = useState<Renter[]>([]);
 
   // Flag: when registerRenterAccount already wrote user+renter docs, skip duplication in onAuthStateChanged
-  const justRegisteredRenterRef = React.useRef<{ uid: string; renterId: string } | null>(null);
+  const justRegisteredRenterRef = useRef<{ uid: string; renterId: string } | null>(null);
 
   // Keep renters in sync for finding assigned renter records
   useEffect(() => {
